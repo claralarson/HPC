@@ -5,84 +5,87 @@
  grand_parent: Systems
 ---
 
+The page [Modules](./modules.md) discuses how to activate and use the modules on Vermilion. Modules are not available by default and must be activated.  Please see the [Modules](./modules.md) page for more information about setting up your environment and loading modules. 
+
 # Running on Vermilion
 
-Please see the [Modules](./modules.md) page for information about setting up your environment and loading modules. This page uses the environment at /nopt/nrel/apps/210929a/myenv.2110041605 as a placeholder since this environment is guaranteed to work, but if a newer environment and set of modules exists, it will be documented in the [Modules](./modules.md) page.
+This page discusses the compute nodes, partitions and gives some examples of building and running applications including running Vasp.
 
+
+## Compute hosts
+Vermilion is a collection of physical nodes with each regular node containing Dual AMD EPYC 7532 Rome CPUs.  However, each node is virtualized.  That is it is split up into virtual nodes with each virtual node having a portion of the cores and memory of the physical node.  Similar virtual nodes are then assigned slurm partitions as shown below.  
+
+## Shared file systems
+
+Vermilion's home directories are shared across all nodes.  There is also /scratch/$USER and /projects spaces seen across all nodes.
 
 ## Partitions
 
-Partitions are flexible and fluid on Vermilion.  A list of partitions can be returned by running the `sinfo` command.
-Currently, all systems are connected via bonded 25GbE (50Gb combined) with OFED/RDMA installed.
+Partitions are flexible and fluid on Vermilion.  A list of partitions can be found by running the `sinfo` command.  Here are the partitions as of 10/20/2022.
 
-| Part Name | Qty | RAM    | processors/node | /opt/scratch | Description     |
-| :--:      | --: | --:    | --:   | --:   | :--                    |
-| GPU       |  5  | 114 GB |   1   |       | Dual NVIDIA Tesla V100s @ 40 GBs |
-| lg        | 18  | 229 GB |   60  |       |      |
-| std       | 62  | 114 GB |   30  |       |      |
-| sm        | 31  |  61 GB |   16  |       |      |
-| t         | 15  |  16 GB |   4   |       |      |
+| Partition Name                          | Qty | RAM    | Cores/node | /var/scratch <br>1K-blocks |
+| :--:                               | --: | --:    | --:             | --:   |                    
+| gpu<br>*1 x NVIDIA Tesla A100*      |  5  | 114 GB |   30            |  6,240,805,336|        
+| lg                                 | 18  | 229 GB |   60            |   1,031,070,000| 
+| std                                | 62  | 114 GB |   30            |     515,010,816| 
+| sm                                 | 31  |  61 GB |   16            |     256,981,000| 
+| t                                  | 15  |  16 GB |   4             |      61,665,000| 
 
 ## Operating Software
 The Vermilion HPC cluster runs fairly current versions of OpenHPC and SLURM on top of OpenStack.
 
-## Hardware
-
-### Compute hosts
-Each host runs Dual AMD EPYC 7532 Rome CPUs, 64 cores per host. Large nodes use all the CPUs except those held back for systems operations.
-
-### GPU nodes
-5 nodes Single A100
-
 
 ## Example
-Environments are provided with a number of commonly used modules including compilers, common build tools, specific AMD optimized libraries, and some analysis tools. The environments are in date stamped subdirectory under in the directory /nopt/nrel/apps.  Each environment directory has a file myenv.\*.   Sourcing that file will enable the environment.
+Environments are provided with a number of commonly used compilers, common build tools, specific optimized libraries, and some analysis tools. Environments must be enabled before modules can be seen.  This is discussed in detail on the page [Modules](./modules.md)
 
-In the directory for an environment you will see a subdirectory **example**.  This contains a makefile for a simple hello world program written in both Fortran and C.  The README.md file contains additional information, most of which is replicated here.  It is suggested you
+You can use the "standard" environment by running the command:
 
 ```
-cp -r example ~/example
+source /nopt/nrel/apps/210929a/myenv.2110041605
+```
+
+The examples on this page uses the environment enabled by this command.   You may want to add this command to your .bashrc file so you have a useful environment when you login.  
+
+In the directory **/nopt/nrel/apps/210929a** you will see a subdirectory **example**.  This contains a makefile for a simple hello world program written in both Fortran and C and several run scripts. The README.md file contains additional information, some of which is replicated here. 
+
+It is suggested you copy the directory to run the examples:
+
+```
+cp -r /nopt/nrel/apps/210929a/example ~/example
 cd ~/example
 ```
 
 ## Simple batch script
 
-Here is a sample batch script for running the hello world examples *runopenmpi*.
-
+Here is a sample batch script, *runopenmpi*, for running the hello world examples .  **NOTE: You must build the applications before running this script.**   Please see **Building hello world first** below.
 
 ```
 #!/bin/bash
 #SBATCH --job-name="install"
-#SBATCH --nodes=1
+#SBATCH --nodes=2
 #SBATCH --exclusive
 #SBATCH --partition=t
 #SBATCH --time=00:01:00
 
-
 cat $0
 
-source /nopt/nrel/apps/210929a/myenv.2110041605
-module load slurm
-
-ml gcc   openmpi
+source /nopt/nrel/apps/210929a/myenv*
+ml gcc   openmpi 
 
 export OMP_NUM_THREADS=2
-srun     -n 2 ./fhostone.I -F
-srun     -n 2 ./phostone.I -F
-```
-
-To run this you must first ensure that slurm is in your path by running:
+srun --mpi=pmi2 -n 2 ./fhostone -F
+srun --mpi=pmi2 -n 2 ./phostone -F
 
 ```
-source /nopt/nrel/apps/210929a/myenv.2110041605
-module load slurm
-```
 
-Then
+
+The submission command is:
 
 ```
-sbatch --partition=sm runopenmpi
+sbatch --partition=sm --account=MY_HPC_ACCOUNT runopenmpi
 ```
+
+where MY\_HPC\_ACCOUNT is your account. 
 
 ## Building hello world first
 
@@ -105,7 +108,8 @@ source /nopt/nrel/apps/210929a/myenv.2110041605
 We are going to use gnu compilers with OpenMPI.
 
 ```
-ml gcc openmpi
+module load gcc 
+module load openmpi
 ```
 
 #### Run make
@@ -114,106 +118,91 @@ ml gcc openmpi
 make
 ```
 
-## Full procedure
+## Full procedure screen dump
 
 ```
-[myuser@~]$ cd /nopt/nrel/apps/210929a
-[myuser@vs:/nopt/nrel/apps/210929a]$ cp -r example ~/example
-[myuser@vs:]$ cd ~/example
-
-[myuser@vs:~/example]$ cat runopenmpi
-    #!/usr/bin/env bash
-    #SBATCH --job-name="install"
-    #SBATCH --nodes=1
-    #SBATCH --exclusive
-    #SBATCH --partition=t
-    #SBATCH --time=00:01:00
-
+[joeuser@vs-login-1 ~]$ cp -r /nopt/nrel/apps/210929a/example ~/example
+[joeuser@vs-login-1 ~]$ cd example/
+[joeuser@vs-login-1 example]$ source /nopt/nrel/apps/210929a/myenv.2110041605
+[joeuser@vs-login-1 example]$ module load gcc
+[joeuser@vs-login-1 example]$ module load openmpi
+[joeuser@vs-login-1 example]$ make
+mpif90 -Wno-argument-mismatch -g -fopenmp fhostone.f90  -o fhostone 
+rm getit.mod  mympi.mod  numz.mod
+mpicc -g -fopenmp phostone.c -o phostone
+[joeuser@vs-login-1 example]$ cat runopenmpi 
+#!/bin/bash
+#SBATCH --job-name="install"
+#SBATCH --nodes=2
+#SBATCH --exclusive
+#SBATCH --partition=t
+#SBATCH --time=00:01:00
 
 cat $0
 
-source /nopt/nrel/apps/210929a/myenv.2110041605
-module load slurm
-
-ml gcc   openmpi
+source /nopt/nrel/apps/210929a/myenv*
+ml gcc   openmpi 
 
 export OMP_NUM_THREADS=2
-mpirun -n 2 ./fhostone -F
-mpirun -n 2 ./phostone -F
+srun --mpi=pmi2 -n 2 ./fhostone -F
+srun --mpi=pmi2 -n 2 ./phostone -F
 
-[myuser@vs example]$ PATH=/nopt/nrel/slurm/bin:$PATH
-[myuser@vs example]$ source /nopt/nrel/apps/210929a/myenv*
-[myuser@vs example]$ ml gcc   openmpi
-[myuser@vs example]$ make
 
-mpif90 -fopenmp fhostone.f90 -o fhostone
-rm getit.mod  mympi.mod  numz.mod
-mpicc -fopenmp phostone.c -o phostone
-[myuser@vs example]$ sbatch --partition=t runopenmpi
-Submitted batch job 187
-[myuser@vs example]$
+[joeuser@vs-login-1 example]$ sbatch --account=MY_HPC_ACCOUNT runopenmpi 
+Submitted batch job 50031771
+[joeuser@vs-login-1 example]$ 
 ```
 
 ### Results
 
 ```
-[myuser@vs example]$ cat slurm-187.out
+[joeuser@vs example]$ cat slurm-187.out
+[joeuser@vs-login-1 example]$ cat slurm-50031771.out
 #!/bin/bash
 #SBATCH --job-name="install"
-#SBATCH --nodes=1
+#SBATCH --nodes=2
 #SBATCH --exclusive
 #SBATCH --partition=t
 #SBATCH --time=00:01:00
 
-
 cat $0
 
-PATH=/nopt/nrel/slurm/bin:$PATH
-
 source /nopt/nrel/apps/210929a/myenv*
-ml gcc   openmpi
+ml gcc   openmpi 
 
 export OMP_NUM_THREADS=2
-mpirun -n 2 ./fhostone -F
-mpirun -n 2 ./phostone -F
+srun --mpi=pmi2 -n 2 ./fhostone -F
+srun --mpi=pmi2 -n 2 ./phostone -F
 
-MPI Version:Open MPI v4.1.1, package: Open MPI myuser@c1-32 Distribution, ident: 4.1.1, repo rev: v4.1.1, Apr 24, 2021
+SRUN --mpi=pmi2 -n 2 ./fhostone -F
+
+MPI Version:Open MPI v4.1.1, package: Open MPI joeuser@vs-sm-0001 Distribution, ident: 4.1.1, repo rev: v4.1.1, Apr 24, 2021
 task    thread             node name  first task    # on node  core
-0000      0000                 c1-32        0000         0000   000
-0000      0001                 c1-32        0000         0000   064
-0001      0000                 c1-32        0000         0001   065
-0001      0001                 c1-32        0000         0001   001
-MPI VERSION Open MPI v4.1.1, package: Open MPI myuser@c1-32 Distribution, ident: 4.1.1, repo rev: v4.1.1, Apr 24, 2021
+0000      0000    vs-t-0012.vs.hpc.n        0000         0000   002
+0000      0001    vs-t-0012.vs.hpc.n        0000         0000   003
+0001      0000    vs-t-0013.vs.hpc.n        0001         0000   003
+0001      0001    vs-t-0013.vs.hpc.n        0001         0000   002
+SRUN --mpi=pmi2 -n 2 ./phostone -F
+
+MPI VERSION Open MPI v4.1.1, package: Open MPI joeuser@vs-sm-0001 Distribution, ident: 4.1.1, repo rev: v4.1.1, Apr 24, 2021
 task    thread             node name  first task    # on node  core
-0000      0000                 c1-32        0000         0000  0000
-0000      0001                 c1-32        0000         0000  0064
-0001      0001                 c1-32        0000         0001  0065
-0001      0000                 c1-32        0000         0001  0001
-[myuser@vs example]$
+0000      0000    vs-t-0012.vs.hpc.nrel.gov        0000         0000  0003
+0000      0001    vs-t-0012.vs.hpc.nrel.gov        0000         0000  0002
+0001      0000    vs-t-0013.vs.hpc.nrel.gov        0001         0000  0003
+0001      0001    vs-t-0013.vs.hpc.nrel.gov        0001         0000  0000
+[joeuser@vs-login-1 example]$ 
 
 ```
+
+
+Many programs can be built/run with OpenMPI and with icc/ifort as the backend compilers or built/run with the Intel version of MPI with either gcc/gfortran or icc/ifort as the backend compilers.  These options are discussed below.
 
 ## Building with Intel Fortran or Intel C and OpenMPI
 
+
 You can build parallel programs using OpenMPI and the Intel Fortran *ifort* and Intel C *icc* compilers.
 
-We have the example programs build with gnu compilers and OpenMP using  the lines:
 
-```
-[myuser@vs example]$ mpif90 -fopenmp fhostone.f90 -o fhostone
-[myuser@vs example]$ mpicc -fopenmp phostone.c -o phostone
-```
-
-This gives us:
-
-```
-[myuser@vs example]$ ls -l fhostone
--rwxrwxr-x. 1 myuser myuser 36880 Jul 30 13:36 fhostone
-[myuser@vs example]$ ls -l phostone
--rwxrwxr-x. 1 myuser myuser 27536 Jul 30 13:36 phostone
-
-```
-Note the size of the executable files.
 
 If you want to use the Intel compilers you first do a module load.
 
@@ -224,20 +213,14 @@ ml intel-oneapi-compilers
 Then we can set the variables *OMPI_FC=ifort* and *OMPI_CC=icc*.  Then recompile.
 
 ```
-[myuser@vs example]$ export OMPI_FC=ifort
-[myuser@vs example]$ export OMPI_CC=icc
-[myuser@vs example]$ mpif90 -fopenmp fhostone.f90 -o fhostone
-[myuser@vs example]$ mpicc -fopenmp phostone.c -o phostone
+[joeuser@vs example]$ export OMPI_FC=ifort
+[joeuser@vs example]$ export OMPI_CC=icc
+[joeuser@vs example]$ mpif90 -fopenmp fhostone.f90 -o fhostone
+[joeuser@vs example]$ mpicc -fopenmp phostone.c -o phostone
 
-
-[myuser@vs example]$ ls -lt fhostone
--rwxrwxr-x. 1 myuser myuser 951448 Jul 30 13:37 fhostone
-[myuser@vs example]$ ls -lt phostone
--rwxrwxr-x. 1 myuser myuser 155856 Jul 30 13:37 phostone
-[myuser@vs example]$
 ```
 
-Note the size of the executable files have changed.  You can also see the difference by running the commands
+If you do a *ls -l* on the executable files you will note the size of the files change with different compiler versions.  You can also see the difference by running the commands
 
 ```
 nm fhostone | grep intel | wc
@@ -249,7 +232,7 @@ on the two versions of the program.  It will show how many calls to Intel routin
 
 ## Building and Running with Intel MPI
 
-We can build with the Intel versions of MPI.  We assume we will want to build with icc and ifort as the backend compilers.  We load the modules:
+We can build with the Intel versions of MPI and with icc and ifort as the backend compilers.  We load the modules:
 
 ```
 ml gcc
@@ -264,21 +247,18 @@ make clean
 make PFC=mpiifort PCC=mpiicc
 ```
 
-Giving us:
+The actual compile lines produced by make are:
 
 ```
-[myuser@swift-login-1 example]$ ls -lt fhostone phostone
--rwxrwxr-x. 1 myuser hpcapps 155696 Aug  5 16:14 phostone
--rwxrwxr-x. 1 myuser hpcapps 947112 Aug  5 16:14 fhostone
-[myuser@swift-login-1 example]$
+mpiifort -g -fopenmp fhostone.f90  -o fhostone 
+mpiicc   -g -fopenmp phostone.c    -o phostone
 ```
 
-We need to make some changes to our batch script.  Add the lines:
+For running, we need to make some changes to our batch script.  Replace the load of openmpi with:
 
 ```
 ml intel-oneapi-compilers
 ml intel-oneapi-mpi
-export I_MPI_PMI_LIBRARY=/nopt/nrel/apps/210929a/level01/gcc-9.4.0/slurm-21-08-1-1/lib/libpmi2.so
 ```
 
 Launch with the srun command:
@@ -293,30 +273,29 @@ Our IntelMPI batch script is:
 
 
 ```
+[joeuser@vs-login-1 example]$ cat runintel 
 #!/bin/bash
 #SBATCH --job-name="install"
-#SBATCH --nodes=1
+#SBATCH --nodes=2
 #SBATCH --exclusive
-#SBATCH --partition=t
+#SBATCH --partition=lg
 #SBATCH --time=00:01:00
-
 
 cat $0
 
-PATH=/nopt/nrel/slurm/bin:$PATH
 source /nopt/nrel/apps/210929a/myenv*
 ml intel-oneapi-mpi intel-oneapi-compilers gcc
-export I_MPI_PMI_LIBRARY=/nopt/nrel/apps/210929a/level01/gcc-9.4.0/slurm-21-08-1-1/lib/libpmi2.so
-
 
 export OMP_NUM_THREADS=2
 srun --mpi=pmi2 -n 2 ./fhostone -F
 srun --mpi=pmi2 -n 2 ./phostone -F
 
 
+
 ```
 
 With output
+
 ```
 MPI Version:Intel(R) MPI Library 2021.3 for Linux* OS
 
@@ -333,6 +312,38 @@ task    thread             node name  first task    # on node  core
 0000      0001                 c1-32        0000         0000  0097
 0001      0000                 c1-32        0000         0001  0127
 0001      0001                 c1-32        0000         0001  0099
+```
+
+## Linking Intel's MKL library.
+
+The environment defined by sourcing the file /nopt/nrel/apps/210929a/myenv.2110041605
+enables loading of many other modules, including one for Intel's MKL 
+library. Then to build against MKL using the Intel compilers
+icc or ifort you normally just need to add the flag **-mkl**.
+
+There are examples in the directory /nopt/nrel/apps/210929a/example/mkl.
+There is a Readme.md file that explains in a bit more detail.
+
+Assuming you copied the example directory to you home directory the mkl examples will be in ~example/mkl
+
+The short version is that you can:
+
+```
+[joeuser@vs-login-1 mkl]$ cd ~/example/mkl
+[joeuser@vs-login-1 mkl]$ source /nopt/nrel/apps/210929a/myenv.2110041605
+[joeuser@vs-login-1 mkl]$ module purge
+[joeuser@vs-login-1 mkl]$ module load intel-oneapi-compilers
+[joeuser@vs-login-1 mkl]$ module load intel-oneapi-mkl
+[joeuser@vs-login-1 mkl]$ module load gcc
+
+[joeuser@vs-login-1 mkl]$ icc   -O3 -o mklc mkl.c   -mkl
+[joeuser@vs-login-1 mkl]$ ifort -O3 -o mklf mkl.f90 -mkl
+
+```
+or to build and run the examples using make instead directly calling icc and ifort you can:
+
+```
+make run
 ```
 
 # Running VASP on Vermilion
@@ -689,3 +700,5 @@ wget https://github.nrel.gov/raw/ESIF-Benchmarks/VASP/master/bench2/input/KPOINT
 mpirun -npernode 1 vasp_std > vasp.$SLURM_JOB_ID.
 
 ```
+
+
