@@ -96,6 +96,8 @@ markdown_extensions:
   - meta
   - pymdownx.highlight
   - pymdownx.superfences
+  - pymdownx.details
+  - admonition
 extra:
   analytics:
     provider: google
