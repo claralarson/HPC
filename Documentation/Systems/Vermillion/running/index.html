@@ -1,0 +1,3045 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
+    
+    
+      
+        <title>Running on Vermillion - NREL HPC</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.975780f9.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.2505c338.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+
+  <script id="__analytics">function __md_analytics(){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-189117140-2","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");ga("send","event","feedback","click",t,e),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){ga("send","pageview",e.pathname)})});var e=document.createElement("script");e.async=!0,e.src="https://www.google-analytics.com/analytics.js",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
+
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="None" data-md-color-accent="None">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#running-on-vermilion" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="NREL HPC" class="md-header__button md-logo" aria-label="NREL HPC" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            NREL HPC
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Running on Vermillion
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/NREL/HPC/tree/gh-pages" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    NREL/HPC
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../.." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../Announcements/2022-08-11-announcement/" class="md-tabs__link">
+        Announcements
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../blog/2020-12-01-numba/" class="md-tabs__link">
+        Blog
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../" class="md-tabs__link md-tabs__link--active">
+        Documentation
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="NREL HPC" class="md-nav__button md-logo" aria-label="NREL HPC" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    NREL HPC
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/NREL/HPC/tree/gh-pages" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    NREL/HPC
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Announcements
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Announcements" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Announcements
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Announcements/2022-08-11-announcement/" class="md-nav__link">
+        August 2022 Monthly Update
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Announcements/2022-05-04-announcement/" class="md-nav__link">
+        May 2022 Monthly Update
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Announcements/2022-04-06-announcement/" class="md-nav__link">
+        April 2022 Monthly Update
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Announcements/2022-03-02-announcement/" class="md-nav__link">
+        March 2022 Monthly Update
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Announcements/2022-02-02-announcement/" class="md-nav__link">
+        February 2022 Monthly Update
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Announcements/2022-01-05-announcement/" class="md-nav__link">
+        January 2022 Monthly Update
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Announcements/2021-12-08-announcement/" class="md-nav__link">
+        December 2021 Monthly Update
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Announcements/2021-11-03-announcement/" class="md-nav__link">
+        November 2021 Monthly Update
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Announcements/2021-09-08-announcement/" class="md-nav__link">
+        September 2021 Monthly Update
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Announcements/2021-08-06-announcement/" class="md-nav__link">
+        August 2021 Monthly Update
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Announcements/2021-07-06-announcement/" class="md-nav__link">
+        July 2021 Monthly Update
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Announcements/2021-06-01-announcement/" class="md-nav__link">
+        June 2021 Monthly Update
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Announcements/2021-05-05-announcement/" class="md-nav__link">
+        May 2021 Monthly Update
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Announcements/2021-04-06-announcement/" class="md-nav__link">
+        April 2021 Monthly Update
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Announcements/2021-03-03-announcement/" class="md-nav__link">
+        March 2021 Monthly Update
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Announcements/2021-02-02-announcement/" class="md-nav__link">
+        February 2021 Monthly Update
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Announcements/2021-01-04-announcement/" class="md-nav__link">
+        January 2021 Monthly Update
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Announcements/2020-12-03-announcement/" class="md-nav__link">
+        December 2020 Monthly Update
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Announcements/2020-11-03-announcement/" class="md-nav__link">
+        November 2020 Monthly Update
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Blog
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Blog" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Blog
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../blog/2020-12-01-numba/" class="md-nav__link">
+        Speeding up Python Code with Numba
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../blog/2021-05-06-tf/" class="md-nav__link">
+        Faster Machine Learning with Custom Built TensorFlow on Eagle
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../blog/2021-06-18-srun/" class="md-nav__link">
+        Using srun to launch applications under slurm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../blog/2022-10-04-python2to3/" class="md-nav__link">
+        Running Legacy Python 2 Code on Eagle
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../">Documentation</a>
+          
+            <label for="__nav_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="Documentation" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Documentation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_2" type="checkbox" id="__nav_4_2" checked>
+      
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../">Systems</a>
+          
+            <label for="__nav_4_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="Systems" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Systems
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_2_2" type="checkbox" id="__nav_4_2_2" >
+      
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../Swift/">Swift</a>
+          
+            <label for="__nav_4_2_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="Swift" data-md-level="3">
+        <label class="md-nav__title" for="__nav_4_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Swift
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Swift/filesystems/" class="md-nav__link">
+        Filesystems
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Swift/modules/" class="md-nav__link">
+        Modules
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Swift/running/" class="md-nav__link">
+        Running on Swift
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Swift/applications/" class="md-nav__link">
+        Applications
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Swift/known/" class="md-nav__link">
+        Known Issues/FAQ
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Swift/help/" class="md-nav__link">
+        Help and Support
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_2_3" type="checkbox" id="__nav_4_2_3" checked>
+      
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../">Vermillion</a>
+          
+            <label for="__nav_4_2_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="Vermillion" data-md-level="3">
+        <label class="md-nav__title" for="__nav_4_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Vermillion
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modules/" class="md-nav__link">
+        Modules
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Running on Vermillion
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Running on Vermillion
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#compute-hosts" class="md-nav__link">
+    Compute hosts
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shared-file-systems" class="md-nav__link">
+    Shared file systems
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#partitions" class="md-nav__link">
+    Partitions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operating-software" class="md-nav__link">
+    Operating Software
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#simple-batch-script" class="md-nav__link">
+    Simple batch script
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building-hello-world-first" class="md-nav__link">
+    Building hello world first
+  </a>
+  
+    <nav class="md-nav" aria-label="Building hello world first">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#loading-the-environment" class="md-nav__link">
+    Loading the environment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loading-the-modules" class="md-nav__link">
+    Loading the modules.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-make" class="md-nav__link">
+    Run make
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#full-procedure-screen-dump" class="md-nav__link">
+    Full procedure screen dump
+  </a>
+  
+    <nav class="md-nav" aria-label="Full procedure screen dump">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#results" class="md-nav__link">
+    Results
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building-with-intel-fortran-or-intel-c-and-openmpi" class="md-nav__link">
+    Building with Intel Fortran or Intel C and OpenMPI
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building-and-running-with-intel-mpi" class="md-nav__link">
+    Building and Running with Intel MPI
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#linking-intels-mkl-library" class="md-nav__link">
+    Linking Intel's MKL library.
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../applications/" class="md-nav__link">
+        Applications
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_3" type="checkbox" id="__nav_4_3" >
+      
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4_3">
+          Data and File Systems
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Data and File Systems" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          Data and File Systems
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_3_1" type="checkbox" id="__nav_4_3_1" >
+      
+      
+      
+        
+          
+            
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../Data-and-File-Systems/File-Systems/">File Systems</a>
+          
+            <label for="__nav_4_3_1">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="File Systems" data-md-level="3">
+        <label class="md-nav__title" for="__nav_4_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          File Systems
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_3_1_2" type="checkbox" id="__nav_4_3_1_2" >
+      
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4_3_1_2">
+          Lustre
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Lustre" data-md-level="4">
+        <label class="md-nav__title" for="__nav_4_3_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          Lustre
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Data-and-File-Systems/File-Systems/Lustre/lustrebestpractices/" class="md-nav__link">
+        Lustre Best Practices
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_3_2" type="checkbox" id="__nav_4_3_2" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4_3_2">
+          Transferring Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Transferring Data" data-md-level="3">
+        <label class="md-nav__title" for="__nav_4_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Transferring Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Data-and-File-Systems/Transferring-Data/FileZilla/" class="md-nav__link">
+        FileZilla
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Data-and-File-Systems/Transferring-Data/file-transfers/" class="md-nav__link">
+        File Transfers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Data-and-File-Systems/Transferring-Data/globus/" class="md-nav__link">
+        Globus
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_4" type="checkbox" id="__nav_4_4" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4_4">
+          Software and Tools
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Software and Tools" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_4">
+          <span class="md-nav__icon md-icon"></span>
+          Software and Tools
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_4_1" type="checkbox" id="__nav_4_4_1" >
+      
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../Software_Tools/Containers/">Containers</a>
+          
+            <label for="__nav_4_4_1">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="Containers" data-md-level="3">
+        <label class="md-nav__title" for="__nav_4_4_1">
+          <span class="md-nav__icon md-icon"></span>
+          Containers
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Software_Tools/Containers/registres/" class="md-nav__link">
+        Container registries at NREL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Software_Tools/Containers/singularity/" class="md-nav__link">
+        Singularity on Eagle
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_4_2" type="checkbox" id="__nav_4_4_2" >
+      
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../Software_Tools/building-packages/">Building Packages</a>
+          
+            <label for="__nav_4_4_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="Building Packages" data-md-level="3">
+        <label class="md-nav__title" for="__nav_4_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Building Packages
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Software_Tools/building-packages/acquire/" class="md-nav__link">
+        Acquire
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Software_Tools/building-packages/config_make_install/" class="md-nav__link">
+        Config Make Install
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Software_Tools/building-packages/modules/" class="md-nav__link">
+        Modules
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_4_3" type="checkbox" id="__nav_4_4_3" >
+      
+      
+      
+        
+          
+            
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../Software_Tools/Jupyter/">Jupyter</a>
+          
+            <label for="__nav_4_4_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="Jupyter" data-md-level="3">
+        <label class="md-nav__title" for="__nav_4_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          Jupyter
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Software_Tools/Jupyter/jupyterhub/" class="md-nav__link">
+        JupyterHub
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_4_4" type="checkbox" id="__nav_4_4_4" >
+      
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4_4_4">
+          Data and Visualization
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Data and Visualization" data-md-level="3">
+        <label class="md-nav__title" for="__nav_4_4_4">
+          <span class="md-nav__icon md-icon"></span>
+          Data and Visualization
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Software_Tools/FastX/fastx/" class="md-nav__link">
+        FastX
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Software_Tools/conda/" class="md-nav__link">
+        Conda
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Software_Tools/spack/" class="md-nav__link">
+        Spack
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Software_Tools/Git/Git/" class="md-nav__link">
+        Git
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_5" type="checkbox" id="__nav_4_5" >
+      
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4_5">
+          Applications
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Applications" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_5">
+          <span class="md-nav__icon md-icon"></span>
+          Applications
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Applications/lammps/" class="md-nav__link">
+        Lammps
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_6" type="checkbox" id="__nav_4_6" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4_6">
+          Languages
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Languages" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_6">
+          <span class="md-nav__icon md-icon"></span>
+          Languages
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_6_1" type="checkbox" id="__nav_4_6_1" >
+      
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4_6_1">
+          Bash
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Bash" data-md-level="3">
+        <label class="md-nav__title" for="__nav_4_6_1">
+          <span class="md-nav__icon md-icon"></span>
+          Bash
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../languages/bash/bash-starter/" class="md-nav__link">
+        Intro to Bash Scripting
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../languages/fortran/f90/" class="md-nav__link">
+        Fortran
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_6_3" type="checkbox" id="__nav_4_6_3" >
+      
+      
+      
+        
+          
+        
+          
+            
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../languages/python/">Python</a>
+          
+            <label for="__nav_4_6_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="Python" data-md-level="3">
+        <label class="md-nav__title" for="__nav_4_6_3">
+          <span class="md-nav__icon md-icon"></span>
+          Python
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../languages/python/NREL_python/" class="md-nav__link">
+        NREL HPC Python
+      </a>
+    </li>
+  
+
+            
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../languages/python/dask/dask/" class="md-nav__link">
+        Dask
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_7" type="checkbox" id="__nav_4_7" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4_7">
+          Machine Learning
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Machine Learning" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_7">
+          <span class="md-nav__icon md-icon"></span>
+          Machine Learning
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_7_1" type="checkbox" id="__nav_4_7_1" >
+      
+      
+      
+        
+          
+            
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../MachineLearning/ReinforcementLearning/">Reinforcement Learning</a>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="Reinforcement Learning" data-md-level="3">
+        <label class="md-nav__title" for="__nav_4_7_1">
+          <span class="md-nav__icon md-icon"></span>
+          Reinforcement Learning
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_7_2" type="checkbox" id="__nav_4_7_2" >
+      
+      
+      
+        
+          
+            
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../MachineLearning/TensorBoard/">Tensor Board</a>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="Tensor Board" data-md-level="3">
+        <label class="md-nav__title" for="__nav_4_7_2">
+          <span class="md-nav__icon md-icon"></span>
+          Tensor Board
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../MachineLearning/tensorflow/" class="md-nav__link">
+        Containerized TensorFlow
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#compute-hosts" class="md-nav__link">
+    Compute hosts
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shared-file-systems" class="md-nav__link">
+    Shared file systems
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#partitions" class="md-nav__link">
+    Partitions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operating-software" class="md-nav__link">
+    Operating Software
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#simple-batch-script" class="md-nav__link">
+    Simple batch script
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building-hello-world-first" class="md-nav__link">
+    Building hello world first
+  </a>
+  
+    <nav class="md-nav" aria-label="Building hello world first">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#loading-the-environment" class="md-nav__link">
+    Loading the environment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loading-the-modules" class="md-nav__link">
+    Loading the modules.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-make" class="md-nav__link">
+    Run make
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#full-procedure-screen-dump" class="md-nav__link">
+    Full procedure screen dump
+  </a>
+  
+    <nav class="md-nav" aria-label="Full procedure screen dump">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#results" class="md-nav__link">
+    Results
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building-with-intel-fortran-or-intel-c-and-openmpi" class="md-nav__link">
+    Building with Intel Fortran or Intel C and OpenMPI
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building-and-running-with-intel-mpi" class="md-nav__link">
+    Building and Running with Intel MPI
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#linking-intels-mkl-library" class="md-nav__link">
+    Linking Intel's MKL library.
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <a href="https://github.com/NREL/HPC/tree/gh-pages/edit/master/docs/Documentation/Systems/Vermillion/running.md" title="Edit this page" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+<p>The page <a href="../modules/">Modules</a> discuses how to activate and use the modules on Vermilion. Modules are not available by default and must be activated.  Please see the <a href="../modules/">Modules</a> page for more information about setting up your environment and loading modules. </p>
+<h1 id="running-on-vermilion">Running on Vermilion</h1>
+<p>This page discusses the compute nodes, partitions and gives some examples of building and running applications including running Vasp.</p>
+<h2 id="compute-hosts">Compute hosts</h2>
+<p>Vermilion is a collection of physical nodes with each regular node containing Dual AMD EPYC 7532 Rome CPUs.  However, each node is virtualized.  That is it is split up into virtual nodes with each virtual node having a portion of the cores and memory of the physical node.  Similar virtual nodes are then assigned slurm partitions as shown below.  </p>
+<h2 id="shared-file-systems">Shared file systems</h2>
+<p>Vermilion's home directories are shared across all nodes.  There is also /scratch/$USER and /projects spaces seen across all nodes.</p>
+<h2 id="partitions">Partitions</h2>
+<p>Partitions are flexible and fluid on Vermilion.  A list of partitions can be found by running the <code>sinfo</code> command.  Here are the partitions as of 10/20/2022.</p>
+<table>
+<thead>
+<tr>
+<th align="center">Partition Name</th>
+<th align="right">Qty</th>
+<th align="right">RAM</th>
+<th align="right">Cores/node</th>
+<th align="right">/var/scratch <br>1K-blocks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">gpu<br><em>1 x NVIDIA Tesla A100</em></td>
+<td align="right">5</td>
+<td align="right">114 GB</td>
+<td align="right">30</td>
+<td align="right">6,240,805,336</td>
+</tr>
+<tr>
+<td align="center">lg</td>
+<td align="right">18</td>
+<td align="right">229 GB</td>
+<td align="right">60</td>
+<td align="right">1,031,070,000</td>
+</tr>
+<tr>
+<td align="center">std</td>
+<td align="right">62</td>
+<td align="right">114 GB</td>
+<td align="right">30</td>
+<td align="right">515,010,816</td>
+</tr>
+<tr>
+<td align="center">sm</td>
+<td align="right">31</td>
+<td align="right">61 GB</td>
+<td align="right">16</td>
+<td align="right">256,981,000</td>
+</tr>
+<tr>
+<td align="center">t</td>
+<td align="right">15</td>
+<td align="right">16 GB</td>
+<td align="right">4</td>
+<td align="right">61,665,000</td>
+</tr>
+</tbody>
+</table>
+<h2 id="operating-software">Operating Software</h2>
+<p>The Vermilion HPC cluster runs fairly current versions of OpenHPC and SLURM on top of OpenStack.</p>
+<h2 id="example">Example</h2>
+<p>Environments are provided with a number of commonly used compilers, common build tools, specific optimized libraries, and some analysis tools. Environments must be enabled before modules can be seen.  This is discussed in detail on the page <a href="../modules/">Modules</a></p>
+<p>You can use the "standard" environment by running the command:</p>
+<div class="highlight"><pre><span></span><code>source /nopt/nrel/apps/210929a/myenv.2110041605
+</code></pre></div>
+<p>The examples on this page uses the environment enabled by this command.   You may want to add this command to your .bashrc file so you have a useful environment when you login.  </p>
+<p>In the directory <strong>/nopt/nrel/apps/210929a</strong> you will see a subdirectory <strong>example</strong>.  This contains a makefile for a simple hello world program written in both Fortran and C and several run scripts. The README.md file contains additional information, some of which is replicated here. </p>
+<p>It is suggested you copy the directory to run the examples:</p>
+<div class="highlight"><pre><span></span><code>cp -r /nopt/nrel/apps/210929a/example ~/example
+cd ~/example
+</code></pre></div>
+<h2 id="simple-batch-script">Simple batch script</h2>
+<p>Here is a sample batch script, <em>runopenmpi</em>, for running the hello world examples .  <strong>NOTE: You must build the applications before running this script.</strong>   Please see <strong>Building hello world first</strong> below.</p>
+<div class="highlight"><pre><span></span><code>#!/bin/bash
+#SBATCH --job-name=&quot;install&quot;
+#SBATCH --nodes=2
+#SBATCH --exclusive
+#SBATCH --partition=t
+#SBATCH --time=00:01:00
+
+cat $0
+
+source /nopt/nrel/apps/210929a/myenv*
+ml gcc   openmpi 
+
+export OMP_NUM_THREADS=2
+srun --mpi=pmi2 -n 2 ./fhostone -F
+srun --mpi=pmi2 -n 2 ./phostone -F
+</code></pre></div>
+<p>The submission command is:</p>
+<div class="highlight"><pre><span></span><code>sbatch --partition=sm --account=MY_HPC_ACCOUNT runopenmpi
+</code></pre></div>
+<p>where MY_HPC_ACCOUNT is your account. </p>
+<h2 id="building-hello-world-first">Building hello world first</h2>
+<p>For the script given above to work you must first build the application.  You need to:</p>
+<ol>
+<li>Load the environment</li>
+<li>Load the modules</li>
+<li>make</li>
+</ol>
+<h4 id="loading-the-environment">Loading the environment</h4>
+<p>Loading the environment is just a matter of sourcing the file</p>
+<div class="highlight"><pre><span></span><code>source /nopt/nrel/apps/210929a/myenv.2110041605
+</code></pre></div>
+<h4 id="loading-the-modules">Loading the modules.</h4>
+<p>We are going to use gnu compilers with OpenMPI.</p>
+<div class="highlight"><pre><span></span><code>module load gcc 
+module load openmpi
+</code></pre></div>
+<h4 id="run-make">Run make</h4>
+<div class="highlight"><pre><span></span><code>make
+</code></pre></div>
+<h2 id="full-procedure-screen-dump">Full procedure screen dump</h2>
+<div class="highlight"><pre><span></span><code>[joeuser@vs-login-1 ~]$ cp -r /nopt/nrel/apps/210929a/example ~/example
+[joeuser@vs-login-1 ~]$ cd example/
+[joeuser@vs-login-1 example]$ source /nopt/nrel/apps/210929a/myenv.2110041605
+[joeuser@vs-login-1 example]$ module load gcc
+[joeuser@vs-login-1 example]$ module load openmpi
+[joeuser@vs-login-1 example]$ make
+mpif90 -Wno-argument-mismatch -g -fopenmp fhostone.f90  -o fhostone 
+rm getit.mod  mympi.mod  numz.mod
+mpicc -g -fopenmp phostone.c -o phostone
+[joeuser@vs-login-1 example]$ cat runopenmpi 
+#!/bin/bash
+#SBATCH --job-name=&quot;install&quot;
+#SBATCH --nodes=2
+#SBATCH --exclusive
+#SBATCH --partition=t
+#SBATCH --time=00:01:00
+
+cat $0
+
+source /nopt/nrel/apps/210929a/myenv*
+ml gcc   openmpi 
+
+export OMP_NUM_THREADS=2
+srun --mpi=pmi2 -n 2 ./fhostone -F
+srun --mpi=pmi2 -n 2 ./phostone -F
+
+
+[joeuser@vs-login-1 example]$ sbatch --account=MY_HPC_ACCOUNT runopenmpi 
+Submitted batch job 50031771
+[joeuser@vs-login-1 example]$ 
+</code></pre></div>
+<h3 id="results">Results</h3>
+<div class="highlight"><pre><span></span><code>[joeuser@vs example]$ cat slurm-187.out
+[joeuser@vs-login-1 example]$ cat slurm-50031771.out
+#!/bin/bash
+#SBATCH --job-name=&quot;install&quot;
+#SBATCH --nodes=2
+#SBATCH --exclusive
+#SBATCH --partition=t
+#SBATCH --time=00:01:00
+
+cat $0
+
+source /nopt/nrel/apps/210929a/myenv*
+ml gcc   openmpi 
+
+export OMP_NUM_THREADS=2
+srun --mpi=pmi2 -n 2 ./fhostone -F
+srun --mpi=pmi2 -n 2 ./phostone -F
+
+SRUN --mpi=pmi2 -n 2 ./fhostone -F
+
+MPI Version:Open MPI v4.1.1, package: Open MPI joeuser@vs-sm-0001 Distribution, ident: 4.1.1, repo rev: v4.1.1, Apr 24, 2021
+task    thread             node name  first task    # on node  core
+0000      0000    vs-t-0012.vs.hpc.n        0000         0000   002
+0000      0001    vs-t-0012.vs.hpc.n        0000         0000   003
+0001      0000    vs-t-0013.vs.hpc.n        0001         0000   003
+0001      0001    vs-t-0013.vs.hpc.n        0001         0000   002
+SRUN --mpi=pmi2 -n 2 ./phostone -F
+
+MPI VERSION Open MPI v4.1.1, package: Open MPI joeuser@vs-sm-0001 Distribution, ident: 4.1.1, repo rev: v4.1.1, Apr 24, 2021
+task    thread             node name  first task    # on node  core
+0000      0000    vs-t-0012.vs.hpc.nrel.gov        0000         0000  0003
+0000      0001    vs-t-0012.vs.hpc.nrel.gov        0000         0000  0002
+0001      0000    vs-t-0013.vs.hpc.nrel.gov        0001         0000  0003
+0001      0001    vs-t-0013.vs.hpc.nrel.gov        0001         0000  0000
+[joeuser@vs-login-1 example]$ 
+</code></pre></div>
+<p>Many programs can be built/run with OpenMPI and with icc/ifort as the backend compilers or built/run with the Intel version of MPI with either gcc/gfortran or icc/ifort as the backend compilers.  These options are discussed below.</p>
+<h2 id="building-with-intel-fortran-or-intel-c-and-openmpi">Building with Intel Fortran or Intel C and OpenMPI</h2>
+<p>You can build parallel programs using OpenMPI and the Intel Fortran <em>ifort</em> and Intel C <em>icc</em> compilers.</p>
+<p>If you want to use the Intel compilers you first do a module load.</p>
+<div class="highlight"><pre><span></span><code>ml intel-oneapi-compilers
+</code></pre></div>
+<p>Then we can set the variables <em>OMPI_FC=ifort</em> and <em>OMPI_CC=icc</em>.  Then recompile.</p>
+<div class="highlight"><pre><span></span><code>[joeuser@vs example]$ export OMPI_FC=ifort
+[joeuser@vs example]$ export OMPI_CC=icc
+[joeuser@vs example]$ mpif90 -fopenmp fhostone.f90 -o fhostone
+[joeuser@vs example]$ mpicc -fopenmp phostone.c -o phostone
+</code></pre></div>
+<p>If you do a <em>ls -l</em> on the executable files you will note the size of the files change with different compiler versions.  You can also see the difference by running the commands</p>
+<div class="highlight"><pre><span></span><code>nm fhostone | grep intel | wc
+nm phostone | grep intel | wc
+</code></pre></div>
+<p>on the two versions of the program.  It will show how many calls to Intel routines are in each, 51 and 36 compared to 0 for the gnu versions.</p>
+<h2 id="building-and-running-with-intel-mpi">Building and Running with Intel MPI</h2>
+<p>We can build with the Intel versions of MPI and with icc and ifort as the backend compilers.  We load the modules:</p>
+<div class="highlight"><pre><span></span><code>ml gcc
+ml intel-oneapi-compilers
+ml intel-oneapi-mpi
+</code></pre></div>
+<p>Then, building and running the same example as above:</p>
+<div class="highlight"><pre><span></span><code>make clean
+make PFC=mpiifort PCC=mpiicc
+</code></pre></div>
+<p>The actual compile lines produced by make are:</p>
+<div class="highlight"><pre><span></span><code>mpiifort -g -fopenmp fhostone.f90  -o fhostone 
+mpiicc   -g -fopenmp phostone.c    -o phostone
+</code></pre></div>
+<p>For running, we need to make some changes to our batch script.  Replace the load of openmpi with:</p>
+<div class="highlight"><pre><span></span><code>ml intel-oneapi-compilers
+ml intel-oneapi-mpi
+</code></pre></div>
+<p>Launch with the srun command:</p>
+<div class="highlight"><pre><span></span><code>srun --mpi=pmi2  ./a.out -F
+</code></pre></div>
+<p>Our IntelMPI batch script is:</p>
+<div class="highlight"><pre><span></span><code>[joeuser@vs-login-1 example]$ cat runintel 
+#!/bin/bash
+#SBATCH --job-name=&quot;install&quot;
+#SBATCH --nodes=2
+#SBATCH --exclusive
+#SBATCH --partition=lg
+#SBATCH --time=00:01:00
+
+cat $0
+
+source /nopt/nrel/apps/210929a/myenv*
+ml intel-oneapi-mpi intel-oneapi-compilers gcc
+
+export OMP_NUM_THREADS=2
+srun --mpi=pmi2 -n 2 ./fhostone -F
+srun --mpi=pmi2 -n 2 ./phostone -F
+</code></pre></div>
+<p>With output</p>
+<div class="highlight"><pre><span></span><code>MPI Version:Intel(R) MPI Library 2021.3 for Linux* OS
+
+task    thread             node name  first task    # on node  core
+0000      0000                 c1-32        0000         0000   127
+0000      0001                 c1-32        0000         0000   097
+0001      0000                 c1-32        0000         0001   062
+0001      0001                 c1-32        0000         0001   099
+
+MPI VERSION Intel(R) MPI Library 2021.3 for Linux* OS
+
+task    thread             node name  first task    # on node  core
+0000      0000                 c1-32        0000         0000  0127
+0000      0001                 c1-32        0000         0000  0097
+0001      0000                 c1-32        0000         0001  0127
+0001      0001                 c1-32        0000         0001  0099
+</code></pre></div>
+<h2 id="linking-intels-mkl-library">Linking Intel's MKL library.</h2>
+<p>The environment defined by sourcing the file /nopt/nrel/apps/210929a/myenv.2110041605
+enables loading of many other modules, including one for Intel's MKL 
+library. Then to build against MKL using the Intel compilers
+icc or ifort you normally just need to add the flag <strong>-mkl</strong>.</p>
+<p>There are examples in the directory /nopt/nrel/apps/210929a/example/mkl.
+There is a Readme.md file that explains in a bit more detail.</p>
+<p>Assuming you copied the example directory to you home directory the mkl examples will be in ~example/mkl</p>
+<p>The short version is that you can:</p>
+<p><div class="highlight"><pre><span></span><code>[joeuser@vs-login-1 mkl]$ cd ~/example/mkl
+[joeuser@vs-login-1 mkl]$ source /nopt/nrel/apps/210929a/myenv.2110041605
+[joeuser@vs-login-1 mkl]$ module purge
+[joeuser@vs-login-1 mkl]$ module load intel-oneapi-compilers
+[joeuser@vs-login-1 mkl]$ module load intel-oneapi-mkl
+[joeuser@vs-login-1 mkl]$ module load gcc
+
+[joeuser@vs-login-1 mkl]$ icc   -O3 -o mklc mkl.c   -mkl
+[joeuser@vs-login-1 mkl]$ ifort -O3 -o mklf mkl.f90 -mkl
+</code></pre></div>
+or to build and run the examples using make instead directly calling icc and ifort you can:</p>
+<div class="highlight"><pre><span></span><code>make run
+</code></pre></div>
+<h1 id="running-vasp-on-vermilion">Running VASP on Vermilion</h1>
+<p>A few different versions of VASP are available on Vermilion:
+- <a href="#Running-VASP-5-with-IntelMPI-on-CPUs">VASP 5 (Intel MPI)</a>
+- <a href="#Running-VASP-6-with-IntelMPI-on-CPUs">VASP 6 (Intel MPI)</a>
+- <a href="#Running-VASP-6-with-OpenMPI-on-CPUs">VASP 6 (Open MPI)</a>
+- <a href="#Running-VASP-6-on-GPUs">VASP 6 on GPUs</a></p>
+<p>Running VASP with Open MPI shows a small improvement compared to running with Intel MPI, and running VASP on GPUs shows an even larger improvement.</p>
+<p>VASP runs faster on 1 node than on 2 nodes. In some cases, VASP run times on 2 nodes have been observed to be double (or more) the run times on a single node. Many issues have been reported for running VASP on multiple nodes. In order for MPI to work successfully on Vermilion, it is necessary to specify the interconnect network that Vermilion should use to communicate between nodes. This is documented in each of the scripts below. The documented recommendations for setting the interconnect network have been shown to work well for multi-node jobs on 2 nodes, but aren't guaranteed to produce succesful multi-node runs on 4 nodes. </p>
+<p>If many cores are needed for your VASP calcualtion, it is recommended to run VASP on a singe node in the lg partition (60 cores/node), which provides the largest numbers of cores per node. </p>
+<h2 id="running-vasp-5-with-intelmpi-on-cpus">Running VASP 5 with IntelMPI on CPUs</h2>
+<p>To load a build of VASP 5 that is compatible with Intel MPI (and other necessary modules):</p>
+<div class="highlight"><pre><span></span><code>module use  /nopt/nrel/apps/220525b/level01/modules/lmod/linux-rocky8-x86_64/gcc/12.1.0/
+ml vasp/5.5.4
+ml intel-oneapi-mkl
+ml intel-oneapi-compilers
+ml intel-oneapi-mpi
+</code></pre></div>
+<p>This will give you:</p>
+<div class="highlight"><pre><span></span><code>[myuser@vs example]$ which vasp_gam
+/nopt/nrel/apps/220525b/level01/install/opt/spack/linux-rocky8-zen2/gcc-12.1.0/vasp544/bin/vasp_gam
+[myuser@vs example]$ which vasp_ncl
+/nopt/nrel/apps/220525b/level01/install/opt/spack/linux-rocky8-zen2/gcc-12.1.0/vasp544/bin/vasp_ncl
+[myuser@vs example]$ which vasp_std
+/nopt/nrel/apps/220525b/level01/install/opt/spack/linux-rocky8-zen2/gcc-12.1.0/vasp544/bin/vasp_std
+</code></pre></div>
+<p>Note the directory might be different. </p>
+<p>In order to run on more than one node, we need to specify the network interconnect. To do so, use mpirun instead of srun. We want to use "ens7" as the interconnect. The mpirun command looks like this. </p>
+<div class="highlight"><pre><span></span><code>I_MPI_OFI_PROVIDER=tcp mpirun -iface ens7 -np 16 vasp_std
+</code></pre></div>
+<p>For VASP calculations on a single node, srun is sufficient. However, srun and mpirun produce similar run times. To run with srun for single node calculations, use the following line.</p>
+<div class="highlight"><pre><span></span><code>srun -n 16 vasp_std
+</code></pre></div>
+<p>Then you need to add calls in your script to set up and point to your data files.  So your final script will look something like the following. Here we download data from NREL's benchmark repository.</p>
+<div class="highlight"><pre><span></span><code>#!/bin/bash
+#SBATCH --job-name=vasp
+#SBATCH --nodes=1
+#SBATCH --time=8:00:00
+##SBATCH --error=std.err
+##SBATCH --output=std.out
+#SBATCH --partition=sm
+#SBATCH --exclusive
+
+cat $0
+
+hostname
+
+source /nopt/nrel/apps/210929a/myenv.2110041605
+
+module purge
+module use  /nopt/nrel/apps/220525b/level01/modules/lmod/linux-rocky8-x86_64/gcc/12.1.0/
+ml vasp/5.5.4
+ml intel-oneapi-mkl
+ml intel-oneapi-compilers
+ml intel-oneapi-mpi
+
+# some extra lines that have been shown to improve VASP reliability on Vermilion
+ulimit -s unlimited
+export UCX_TLS=tcp,self
+export OMP_NUM_THREADS=1
+
+#### wget is needed to download data
+ml wget
+
+#### get input and set it up
+#### This is from an old benchmark test
+#### see https://github.nrel.gov/ESIF-Benchmarks/VASP/tree/master/bench2
+
+
+mkdir input
+
+wget https://github.nrel.gov/raw/ESIF-Benchmarks/VASP/master/bench2/input/INCAR?token=AAAALJZRV4QFFTS7RC6LLGLBBV67M   -q -O INCAR
+wget https://github.nrel.gov/raw/ESIF-Benchmarks/VASP/master/bench2/input/POTCAR?token=AAAALJ6E7KHVTGWQMR4RKYTBBV7SC  -q -O POTCAR
+wget https://github.nrel.gov/raw/ESIF-Benchmarks/VASP/master/bench2/input/POSCAR?token=AAAALJ5WKM2QKC3D44SXIQTBBV7P2  -q -O POSCAR
+wget https://github.nrel.gov/raw/ESIF-Benchmarks/VASP/master/bench2/input/KPOINTS?token=AAAALJ5YTSCJFDHUUZMZY63BBV7NU -q -O KPOINTS
+
+# mpirun is recommended (necessary for multi-node calculations)
+I_MPI_OFI_PROVIDER=tcp mpirun -iface ens7 -np 16 vasp_std
+
+# srun can be used instead of mpirun for sinlge node calculations
+# srun -n 16 vasp_std
+</code></pre></div>
+<h2 id="running-vasp-6-with-intelmpi-on-cpus">Running VASP 6 with IntelMPI on CPUs</h2>
+<p>To load a build of VASP 6 that is compatible with Intel MPI (and other necessary modules):</p>
+<div class="highlight"><pre><span></span><code>source /nopt/nrel/apps/210929a/myenv.2110041605 
+ml vaspintel
+ml intel-oneapi-mkl
+ml intel-oneapi-compilers
+ml intel-oneapi-mpi
+</code></pre></div>
+<p>This will give you:</p>
+<div class="highlight"><pre><span></span><code>[myuser@vs example]$ which vasp_gam
+/nopt/nrel/apps/210929a/level01/linux-centos8-zen2/gcc-9.4.0/vaspintel-1.0-dwljo4wr6xcrgxqaq7pz35yqfxdxxsq4/bin/vasp_gam
+[myuser@vs example]$ which vasp_ncl
+/nopt/nrel/apps/210929a/level01/linux-centos8-zen2/gcc-9.4.0/vaspintel-1.0-dwljo4wr6xcrgxqaq7pz35yqfxdxxsq4/bin/vasp_ncl
+[myuser@vs example]$ which vasp_std
+/nopt/nrel/apps/210929a/level01/linux-centos8-zen2/gcc-9.4.0/vaspintel-1.0-dwljo4wr6xcrgxqaq7pz35yqfxdxxsq4/bin/vasp_std
+</code></pre></div>
+<p>Note the directory might be different. </p>
+<p>In order to run on more than one node, we need to specify the network interconnect. To do so, use mpirun instead of srun. We want to use "ens7" as the interconnect. The mpirun command looks like this. </p>
+<div class="highlight"><pre><span></span><code>I_MPI_OFI_PROVIDER=tcp mpirun -iface ens7 -np 16 vasp_std
+</code></pre></div>
+<p>For VASP calculations on a single node, srun is sufficient. However, srun and mpirun produce similar run times. To run with srun for single node calculations, use the following line.</p>
+<div class="highlight"><pre><span></span><code>srun -n 16 vasp_std
+</code></pre></div>
+<p>Then you need to add calls in your script to set up and point to your data files.  So your final script will look something like the following. Here we download data from NREL's benchmark repository.</p>
+<div class="highlight"><pre><span></span><code>#!/bin/bash
+#SBATCH --job-name=vasp
+#SBATCH --nodes=1
+#SBATCH --time=8:00:00
+##SBATCH --error=std.err
+##SBATCH --output=std.out
+#SBATCH --partition=sm
+#SBATCH --exclusive
+
+cat $0
+
+hostname
+
+source /nopt/nrel/apps/210929a/myenv.2110041605
+
+module purge
+source /nopt/nrel/apps/210929a/myenv.2110041605 
+ml intel-oneapi-mkl
+ml intel-oneapi-compilers
+ml intel-oneapi-mpi
+ml vaspintel
+
+# some extra lines that have been shown to improve VASP reliability on Vermilion
+ulimit -s unlimited
+export UCX_TLS=tcp,self
+export OMP_NUM_THREADS=1
+
+#### wget is needed to download data
+ml wget
+
+#### get input and set it up
+#### This is from an old benchmark test
+#### see https://github.nrel.gov/ESIF-Benchmarks/VASP/tree/master/bench2
+
+
+mkdir input
+
+wget https://github.nrel.gov/raw/ESIF-Benchmarks/VASP/master/bench2/input/INCAR?token=AAAALJZRV4QFFTS7RC6LLGLBBV67M   -q -O INCAR
+wget https://github.nrel.gov/raw/ESIF-Benchmarks/VASP/master/bench2/input/POTCAR?token=AAAALJ6E7KHVTGWQMR4RKYTBBV7SC  -q -O POTCAR
+wget https://github.nrel.gov/raw/ESIF-Benchmarks/VASP/master/bench2/input/POSCAR?token=AAAALJ5WKM2QKC3D44SXIQTBBV7P2  -q -O POSCAR
+wget https://github.nrel.gov/raw/ESIF-Benchmarks/VASP/master/bench2/input/KPOINTS?token=AAAALJ5YTSCJFDHUUZMZY63BBV7NU -q -O KPOINTS
+
+# mpirun is recommended (necessary for multi-node calculations)
+I_MPI_OFI_PROVIDER=tcp mpirun -iface ens7 -np 16 vasp_std
+
+# srun can be used instead of mpirun for sinlge node calculations
+# srun -n 16 vasp_std
+</code></pre></div>
+<h2 id="running-vasp-6-with-openmpi-on-cpus">Running VASP 6 with OpenMPI on CPUs</h2>
+<p>To load a build of VASP 6 that is compatible with Open MPI:</p>
+<div class="highlight"><pre><span></span><code>source /nopt/nrel/apps/210929a/myenv.2110041605
+ml vasp
+</code></pre></div>
+<p>This will give you:</p>
+<div class="highlight"><pre><span></span><code>[myuser@vs example]$ which vasp_gam
+/nopt/nrel/apps/123456a/level02/gcc-9.4.0/vasp-6.1.1/bin/vasp_gam
+[myuser@vs example]$ which vasp_ncl
+/nopt/nrel/apps/123456a/level02/gcc-9.4.0/vasp-6.1.1/bin/vasp_ncl
+[myuser@vs example]$ which vasp_std
+/nopt/nrel/apps/123456a/level02/gcc-9.4.0/vasp-6.1.1/bin/vasp_std
+</code></pre></div>
+<p>Note the directory might be different. </p>
+<p>In order to specify the network interconnect, we need to set the OMPI_MCA_param variable. We want to use "ens7" as the interconnect.</p>
+<div class="highlight"><pre><span></span><code>module use /nopt/nrel/apps/220525b/level01/modules/lmod/linux-rocky8-x86_64/gcc/12.1.0
+module load openmpi
+OMPI_MCA_param=&quot;btl_tcp_if_include ens7&quot;
+</code></pre></div>
+<p>Then you need to add calls in your script to set up and point to your data files.  So your final script will look something like the following. Here we download data from NREL's benchmark repository.</p>
+<div class="highlight"><pre><span></span><code>#!/bin/bash
+#SBATCH --job-name=vasp
+#SBATCH --nodes=1
+#SBATCH --time=8:00:00
+##SBATCH --error=std.err
+##SBATCH --output=std.out
+#SBATCH --partition=sm
+#SBATCH --exclusive
+
+cat $0
+
+hostname
+
+source /nopt/nrel/apps/210929a/myenv.2110041605
+
+module purge
+ml gcc
+ml vasp
+
+# some extra lines that have been shown to improve VASP reliability on Vermilion
+ulimit -s unlimited
+export UCX_TLS=tcp,self
+export OMP_NUM_THREADS=1
+
+# lines to set &quot;ens7&quot; as the interconnect network
+module use /nopt/nrel/apps/220525b/level01/modules/lmod/linux-rocky8-x86_64/gcc/12.1.0
+module load openmpi
+OMPI_MCA_param=&quot;btl_tcp_if_include ens7&quot;
+
+#### wget is needed to download data
+ml wget
+
+#### get input and set it up
+#### This is from an old benchmark test
+#### see https://github.nrel.gov/ESIF-Benchmarks/VASP/tree/master/bench2
+
+
+mkdir input
+
+wget https://github.nrel.gov/raw/ESIF-Benchmarks/VASP/master/bench2/input/INCAR?token=AAAALJZRV4QFFTS7RC6LLGLBBV67M   -q -O INCAR
+wget https://github.nrel.gov/raw/ESIF-Benchmarks/VASP/master/bench2/input/POTCAR?token=AAAALJ6E7KHVTGWQMR4RKYTBBV7SC  -q -O POTCAR
+wget https://github.nrel.gov/raw/ESIF-Benchmarks/VASP/master/bench2/input/POSCAR?token=AAAALJ5WKM2QKC3D44SXIQTBBV7P2  -q -O POSCAR
+wget https://github.nrel.gov/raw/ESIF-Benchmarks/VASP/master/bench2/input/KPOINTS?token=AAAALJ5YTSCJFDHUUZMZY63BBV7NU -q -O KPOINTS
+
+srun --mpi=pmi2 -n 16 vasp_std
+</code></pre></div>
+<h2 id="running-vasp-6-on-gpus">Running VASP 6 on GPUs</h2>
+<p>VASP can also be run on Vermilion's GPUs. To do this we need to add a few #SBATCH lines at the top of the script to assign the job to run in the gpu partition and to set the gpu binding. The --gpu-bind flag requires 1 set of "0,1" for each node used. </p>
+<div class="highlight"><pre><span></span><code>#SBATCH --nodes=2
+#SBATCH --partition=gpu
+#SBATCH --gpu-bind=map_gpu:0,1,0,1
+</code></pre></div>
+<p>A gpu build of VASP can be accessed by adding the following path to your PATH variable.</p>
+<div class="highlight"><pre><span></span><code>export PATH=/projects/hpcapps/tkaiser2/vasp/6.3.1/nvhpc_acc:$PATH
+</code></pre></div>
+<p>This will give you:</p>
+<div class="highlight"><pre><span></span><code>[myuser@vs example]$ which vasp_gam
+/projects/hpcapps/tkaiser2/vasp/6.3.1/nvhpc_acc/vasp_gam
+[myuser@vs example]$ which vasp_ncl
+/projects/hpcapps/tkaiser2/vasp/6.3.1/nvhpc_acc/vasp_ncl
+[myuser@vs example]$ which vasp_std
+/projects/hpcapps/tkaiser2/vasp/6.3.1/nvhpc_acc/vasp_std
+</code></pre></div>
+<p>Instead of srun, use mpirun to run VASP on GPUs. Since Vermilion only has 1 GPU per node, it's important to make sure you are only requesting 1 task per node by setting -npernode 1. </p>
+<div class="highlight"><pre><span></span><code>mpirun -npernode 1 vasp_std &gt; vasp.$SLURM_JOB_ID
+</code></pre></div>
+<p>There's a few more modules needed to run VASP on GPUs, and two library variables need to be set. We can modify the VASP CPU script to include lines to load the modules, set library variables and make the changes outlined above. The final script will look something like this.</p>
+<div class="highlight"><pre><span></span><code>#!/bin/bash
+#SBATCH --job-name=vasp
+#SBATCH --nodes=2
+#SBATCH --time=1:00:00
+##SBATCH --error=std.err
+##SBATCH --output=std.out
+#SBATCH --partition=gpu
+#SBATCH --gpu-bind=map_gpu:0,1,0,1
+#SBATCH --exclusive
+
+cat $0
+
+hostname
+
+#load necessary modules and set library paths
+module use  /nopt/nrel/apps/220421a/modules/lmod/linux-rocky8-x86_64/gcc/11.3.0/
+ml nvhpc
+ml gcc
+ml fftw
+export LD_LIBRARY_PATH=/nopt/nrel/apps//220421a/install/opt/spack/linux-rocky8-zen2/gcc-11.3.0/nvhpc-22.2-ruzrtpyewnnrif6s7w7rehvpk7jimdrd/Linux_x86_64/22.2/compilers/extras/qd/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/nopt/nrel/apps//220421a/install/opt/spack/linux-rocky8-zen2/gcc-11.3.0/gcc-11.3.0-c3u46uvtuljfuqimb4bgywoz6oynridg/lib64:$LD_LIBRARY_PATH
+
+#add a path to the gpu build of VASP to your script
+export PATH=/projects/hpcapps/tkaiser2/vasp/6.3.1/nvhpc_acc:$PATH
+
+#### wget is needed to download data
+ml wget
+
+#### get input and set it up
+#### This is from an old benchmark test
+#### see https://github.nrel.gov/ESIF-Benchmarks/VASP/tree/master/bench2
+
+
+mkdir input
+
+wget https://github.nrel.gov/raw/ESIF-Benchmarks/VASP/master/bench2/input/INCAR?token=AAAALJZRV4QFFTS7RC6LLGLBBV67M   -q -O INCAR
+wget https://github.nrel.gov/raw/ESIF-Benchmarks/VASP/master/bench2/input/POTCAR?token=AAAALJ6E7KHVTGWQMR4RKYTBBV7SC  -q -O POTCAR
+wget https://github.nrel.gov/raw/ESIF-Benchmarks/VASP/master/bench2/input/POSCAR?token=AAAALJ5WKM2QKC3D44SXIQTBBV7P2  -q -O POSCAR
+wget https://github.nrel.gov/raw/ESIF-Benchmarks/VASP/master/bench2/input/KPOINTS?token=AAAALJ5YTSCJFDHUUZMZY63BBV7NU -q -O KPOINTS
+
+mpirun -npernode 1 vasp_std &gt; vasp.$SLURM_JOB_ID.
+</code></pre></div>
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+<footer class="md-footer">
+
+  <!-- Link to previous and/or next page -->
+  
+    <nav
+      class="md-footer__inner md-grid"
+      aria-label="Footer"
+    >
+
+      <!-- Link to previous page -->
+      
+        
+        <a
+          href="../modules/"
+          class="md-footer__link md-footer__link--prev"
+          aria-label="Previous: Modules"
+          rel="prev"
+        >
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Modules
+            </div>
+          </div>
+        </a>
+      
+
+      <!-- Link to next page -->
+      
+        
+        <a
+          href="../applications/"
+          class="md-footer__link md-footer__link--next"
+          aria-label="Next: Applications"
+          rel="next"
+        >
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Applications
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+	<a href="https://www.nrel.gov/computational-science/"
+	   title="Computational Science at NREL">Computational Science at NREL</a><br>
+	<a href="https://www.nrel.gov/hpc/about-hpc.html" target="_blank"
+	   title="About NREL High-Performance Computing">About NREL High-Performance Computing</a><br>
+	<a href="https://www.nrel.gov/hpc/contact-us.html" target="_blank"
+	   title="Contact Us">Contact Us</a><br>
+      </div>
+    </div>
+  </div>
+<footer>
+
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.indexes"], "search": "../../../../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.5a2dcb6a.min.js"></script>
+      
+    
+    
+  </body>
+</html>

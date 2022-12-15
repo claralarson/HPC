@@ -1,0 +1,2858 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
+    
+    
+      
+        <title>Spack - NREL HPC</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.975780f9.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.2505c338.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+
+  <script id="__analytics">function __md_analytics(){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-189117140-2","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");ga("send","event","feedback","click",t,e),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){ga("send","pageview",e.pathname)})});var e=document.createElement("script");e.async=!0,e.src="https://www.google-analytics.com/analytics.js",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
+
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="None" data-md-color-accent="None">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="NREL HPC" class="md-header__button md-logo" aria-label="NREL HPC" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            NREL HPC
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Spack
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/NREL/HPC/tree/gh-pages" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    NREL/HPC
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../.." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../Announcements/2022-08-11-announcement/" class="md-tabs__link">
+        Announcements
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../blog/2020-12-01-numba/" class="md-tabs__link">
+        Blog
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../" class="md-tabs__link md-tabs__link--active">
+        Documentation
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="NREL HPC" class="md-nav__button md-logo" aria-label="NREL HPC" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    NREL HPC
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/NREL/HPC/tree/gh-pages" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    NREL/HPC
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Announcements
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Announcements" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Announcements
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Announcements/2022-08-11-announcement/" class="md-nav__link">
+        August 2022 Monthly Update
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Announcements/2022-05-04-announcement/" class="md-nav__link">
+        May 2022 Monthly Update
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Announcements/2022-04-06-announcement/" class="md-nav__link">
+        April 2022 Monthly Update
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Announcements/2022-03-02-announcement/" class="md-nav__link">
+        March 2022 Monthly Update
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Announcements/2022-02-02-announcement/" class="md-nav__link">
+        February 2022 Monthly Update
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Announcements/2022-01-05-announcement/" class="md-nav__link">
+        January 2022 Monthly Update
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Announcements/2021-12-08-announcement/" class="md-nav__link">
+        December 2021 Monthly Update
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Announcements/2021-11-03-announcement/" class="md-nav__link">
+        November 2021 Monthly Update
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Announcements/2021-09-08-announcement/" class="md-nav__link">
+        September 2021 Monthly Update
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Announcements/2021-08-06-announcement/" class="md-nav__link">
+        August 2021 Monthly Update
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Announcements/2021-07-06-announcement/" class="md-nav__link">
+        July 2021 Monthly Update
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Announcements/2021-06-01-announcement/" class="md-nav__link">
+        June 2021 Monthly Update
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Announcements/2021-05-05-announcement/" class="md-nav__link">
+        May 2021 Monthly Update
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Announcements/2021-04-06-announcement/" class="md-nav__link">
+        April 2021 Monthly Update
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Announcements/2021-03-03-announcement/" class="md-nav__link">
+        March 2021 Monthly Update
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Announcements/2021-02-02-announcement/" class="md-nav__link">
+        February 2021 Monthly Update
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Announcements/2021-01-04-announcement/" class="md-nav__link">
+        January 2021 Monthly Update
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Announcements/2020-12-03-announcement/" class="md-nav__link">
+        December 2020 Monthly Update
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Announcements/2020-11-03-announcement/" class="md-nav__link">
+        November 2020 Monthly Update
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Blog
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Blog" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Blog
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../blog/2020-12-01-numba/" class="md-nav__link">
+        Speeding up Python Code with Numba
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../blog/2021-05-06-tf/" class="md-nav__link">
+        Faster Machine Learning with Custom Built TensorFlow on Eagle
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../blog/2021-06-18-srun/" class="md-nav__link">
+        Using srun to launch applications under slurm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../blog/2022-10-04-python2to3/" class="md-nav__link">
+        Running Legacy Python 2 Code on Eagle
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../">Documentation</a>
+          
+            <label for="__nav_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="Documentation" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Documentation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_2" type="checkbox" id="__nav_4_2" >
+      
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../Systems/">Systems</a>
+          
+            <label for="__nav_4_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="Systems" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Systems
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_2_2" type="checkbox" id="__nav_4_2_2" >
+      
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../Systems/Swift/">Swift</a>
+          
+            <label for="__nav_4_2_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="Swift" data-md-level="3">
+        <label class="md-nav__title" for="__nav_4_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Swift
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Systems/Swift/filesystems/" class="md-nav__link">
+        Filesystems
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Systems/Swift/modules/" class="md-nav__link">
+        Modules
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Systems/Swift/running/" class="md-nav__link">
+        Running on Swift
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Systems/Swift/applications/" class="md-nav__link">
+        Applications
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Systems/Swift/known/" class="md-nav__link">
+        Known Issues/FAQ
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Systems/Swift/help/" class="md-nav__link">
+        Help and Support
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_2_3" type="checkbox" id="__nav_4_2_3" >
+      
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../Systems/Vermillion/">Vermillion</a>
+          
+            <label for="__nav_4_2_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="Vermillion" data-md-level="3">
+        <label class="md-nav__title" for="__nav_4_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Vermillion
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Systems/Vermillion/modules/" class="md-nav__link">
+        Modules
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Systems/Vermillion/running/" class="md-nav__link">
+        Running on Vermillion
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Systems/Vermillion/applications/" class="md-nav__link">
+        Applications
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_3" type="checkbox" id="__nav_4_3" >
+      
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4_3">
+          Data and File Systems
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Data and File Systems" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          Data and File Systems
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_3_1" type="checkbox" id="__nav_4_3_1" >
+      
+      
+      
+        
+          
+            
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../Data-and-File-Systems/File-Systems/">File Systems</a>
+          
+            <label for="__nav_4_3_1">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="File Systems" data-md-level="3">
+        <label class="md-nav__title" for="__nav_4_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          File Systems
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_3_1_2" type="checkbox" id="__nav_4_3_1_2" >
+      
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4_3_1_2">
+          Lustre
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Lustre" data-md-level="4">
+        <label class="md-nav__title" for="__nav_4_3_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          Lustre
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Data-and-File-Systems/File-Systems/Lustre/lustrebestpractices/" class="md-nav__link">
+        Lustre Best Practices
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_3_2" type="checkbox" id="__nav_4_3_2" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4_3_2">
+          Transferring Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Transferring Data" data-md-level="3">
+        <label class="md-nav__title" for="__nav_4_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Transferring Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Data-and-File-Systems/Transferring-Data/FileZilla/" class="md-nav__link">
+        FileZilla
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Data-and-File-Systems/Transferring-Data/file-transfers/" class="md-nav__link">
+        File Transfers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Data-and-File-Systems/Transferring-Data/globus/" class="md-nav__link">
+        Globus
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_4" type="checkbox" id="__nav_4_4" checked>
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4_4">
+          Software and Tools
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Software and Tools" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_4">
+          <span class="md-nav__icon md-icon"></span>
+          Software and Tools
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_4_1" type="checkbox" id="__nav_4_4_1" >
+      
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../Containers/">Containers</a>
+          
+            <label for="__nav_4_4_1">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="Containers" data-md-level="3">
+        <label class="md-nav__title" for="__nav_4_4_1">
+          <span class="md-nav__icon md-icon"></span>
+          Containers
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Containers/registres/" class="md-nav__link">
+        Container registries at NREL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Containers/singularity/" class="md-nav__link">
+        Singularity on Eagle
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_4_2" type="checkbox" id="__nav_4_4_2" >
+      
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../building-packages/">Building Packages</a>
+          
+            <label for="__nav_4_4_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="Building Packages" data-md-level="3">
+        <label class="md-nav__title" for="__nav_4_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Building Packages
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../building-packages/acquire/" class="md-nav__link">
+        Acquire
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../building-packages/config_make_install/" class="md-nav__link">
+        Config Make Install
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../building-packages/modules/" class="md-nav__link">
+        Modules
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_4_3" type="checkbox" id="__nav_4_4_3" >
+      
+      
+      
+        
+          
+            
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../Jupyter/">Jupyter</a>
+          
+            <label for="__nav_4_4_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="Jupyter" data-md-level="3">
+        <label class="md-nav__title" for="__nav_4_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          Jupyter
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Jupyter/jupyterhub/" class="md-nav__link">
+        JupyterHub
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_4_4" type="checkbox" id="__nav_4_4_4" >
+      
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4_4_4">
+          Data and Visualization
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Data and Visualization" data-md-level="3">
+        <label class="md-nav__title" for="__nav_4_4_4">
+          <span class="md-nav__icon md-icon"></span>
+          Data and Visualization
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FastX/fastx/" class="md-nav__link">
+        FastX
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../conda/" class="md-nav__link">
+        Conda
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Spack
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Spack
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    Installation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-compilers" class="md-nav__link">
+    Setting Up Compilers
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#available-packages-in-repo" class="md-nav__link">
+    Available Packages in Repo
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installed-packages" class="md-nav__link">
+    Installed packages
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#external-packages" class="md-nav__link">
+    External Packages
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#virtual-packages" class="md-nav__link">
+    Virtual Packages
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extensions" class="md-nav__link">
+    Extensions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modules" class="md-nav__link">
+    Modules
+  </a>
+  
+    <nav class="md-nav" aria-label="Modules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#to-turn-lmod-module-creation-on" class="md-nav__link">
+    To turn Lmod module creation on:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#to-change-the-modulefile-naming-pattern" class="md-nav__link">
+    To change the modulefile naming pattern:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#to-remove-default-variable-settings-in-the-modulefile-eg-cpath" class="md-nav__link">
+    To remove default variable settings in the modulefile, e.g., CPATH:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#to-prevent-certain-modulefiles-from-being-built-you-can-whitelist-and-blacklist" class="md-nav__link">
+    To prevent certain modulefiles from being built, you can whitelist and blacklist:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    Configuration
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#variants-standard-adjustments-to-package-build" class="md-nav__link">
+    Variants: standard adjustments to package build
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#providers" class="md-nav__link">
+    Providers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mirrors" class="md-nav__link">
+    Mirrors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repos" class="md-nav__link">
+    Repos
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Git/Git/" class="md-nav__link">
+        Git
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_5" type="checkbox" id="__nav_4_5" >
+      
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4_5">
+          Applications
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Applications" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_5">
+          <span class="md-nav__icon md-icon"></span>
+          Applications
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Applications/lammps/" class="md-nav__link">
+        Lammps
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_6" type="checkbox" id="__nav_4_6" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4_6">
+          Languages
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Languages" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_6">
+          <span class="md-nav__icon md-icon"></span>
+          Languages
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_6_1" type="checkbox" id="__nav_4_6_1" >
+      
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4_6_1">
+          Bash
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Bash" data-md-level="3">
+        <label class="md-nav__title" for="__nav_4_6_1">
+          <span class="md-nav__icon md-icon"></span>
+          Bash
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../languages/bash/bash-starter/" class="md-nav__link">
+        Intro to Bash Scripting
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../languages/fortran/f90/" class="md-nav__link">
+        Fortran
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_6_3" type="checkbox" id="__nav_4_6_3" >
+      
+      
+      
+        
+          
+        
+          
+            
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../languages/python/">Python</a>
+          
+            <label for="__nav_4_6_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="Python" data-md-level="3">
+        <label class="md-nav__title" for="__nav_4_6_3">
+          <span class="md-nav__icon md-icon"></span>
+          Python
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../languages/python/NREL_python/" class="md-nav__link">
+        NREL HPC Python
+      </a>
+    </li>
+  
+
+            
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../languages/python/dask/dask/" class="md-nav__link">
+        Dask
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_7" type="checkbox" id="__nav_4_7" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4_7">
+          Machine Learning
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Machine Learning" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_7">
+          <span class="md-nav__icon md-icon"></span>
+          Machine Learning
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_7_1" type="checkbox" id="__nav_4_7_1" >
+      
+      
+      
+        
+          
+            
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../MachineLearning/ReinforcementLearning/">Reinforcement Learning</a>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="Reinforcement Learning" data-md-level="3">
+        <label class="md-nav__title" for="__nav_4_7_1">
+          <span class="md-nav__icon md-icon"></span>
+          Reinforcement Learning
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_7_2" type="checkbox" id="__nav_4_7_2" >
+      
+      
+      
+        
+          
+            
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../MachineLearning/TensorBoard/">Tensor Board</a>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="Tensor Board" data-md-level="3">
+        <label class="md-nav__title" for="__nav_4_7_2">
+          <span class="md-nav__icon md-icon"></span>
+          Tensor Board
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../MachineLearning/tensorflow/" class="md-nav__link">
+        Containerized TensorFlow
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    Installation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-compilers" class="md-nav__link">
+    Setting Up Compilers
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#available-packages-in-repo" class="md-nav__link">
+    Available Packages in Repo
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installed-packages" class="md-nav__link">
+    Installed packages
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#external-packages" class="md-nav__link">
+    External Packages
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#virtual-packages" class="md-nav__link">
+    Virtual Packages
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extensions" class="md-nav__link">
+    Extensions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modules" class="md-nav__link">
+    Modules
+  </a>
+  
+    <nav class="md-nav" aria-label="Modules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#to-turn-lmod-module-creation-on" class="md-nav__link">
+    To turn Lmod module creation on:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#to-change-the-modulefile-naming-pattern" class="md-nav__link">
+    To change the modulefile naming pattern:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#to-remove-default-variable-settings-in-the-modulefile-eg-cpath" class="md-nav__link">
+    To remove default variable settings in the modulefile, e.g., CPATH:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#to-prevent-certain-modulefiles-from-being-built-you-can-whitelist-and-blacklist" class="md-nav__link">
+    To prevent certain modulefiles from being built, you can whitelist and blacklist:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    Configuration
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#variants-standard-adjustments-to-package-build" class="md-nav__link">
+    Variants: standard adjustments to package build
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#providers" class="md-nav__link">
+    Providers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mirrors" class="md-nav__link">
+    Mirrors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repos" class="md-nav__link">
+    Repos
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <a href="https://github.com/NREL/HPC/tree/gh-pages/edit/master/docs/Documentation/Software_Tools/spack.md" title="Edit this page" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+  <h1>Spack</h1>
+
+<h2 id="introduction">Introduction</h2>
+<p>Spack is an HPC-centric package manager for acquiring, building, and managing HPC applications as well as all their dependencies, down to the compilers themselves. Like frameworks such as Anaconda, it is associated with a repository of both source-code and binary packages. Builds are fully configurable through a DSL at the command line as well as in YAML files. Maintaining many build-time permutations of packages is simple through an automatic and user-transparent hashing mechanism. The Spack system also automatically creates (customizable) environment modulefiles for each built package.</p>
+<h2 id="installation">Installation</h2>
+<p>Multiple installations of Spack can easily be kept, and each is separate from the others by virtue of the environment variable <code>SPACK_ROOT</code>. 
+All package, build, and modulefile content is kept inside the <code>SPACK_ROOT</code> path, so working with different package collections is as simple as setting <code>SPACK_ROOT</code> to the appropriate location. 
+The only exception to this orthogonality are <code>YAML</code> files in <code>$HOME/.spack/&lt;platform&gt;</code>.
+Installing a Spack instance is as easy as</p>
+<p><code>git clone https://github.com/spack/spack.git</code></p>
+<p>Once the initial Spack instance is set up, it is easy to create new ones from it through</p>
+<p><code>spack clone &lt;new_path&gt;</code></p>
+<p><code>SPACK_ROOT</code> will need to point to <code>&lt;new_path&gt;</code> in order to be consistent.</p>
+<p>Spack environment setup can be done by sourcing <code>$SPACK_ROOT/share/spack/setup-env.sh</code>, or by simply adding <code>$SPACK_ROOT/bin</code> to your PATH. </p>
+<p><code>source $SPACK_ROOT/share/spack/setup-env.sh</code>
+or 
+<code>export PATH=$SPACK_ROOT/bin:$PATH</code></p>
+<h2 id="setting-up-compilers">Setting Up Compilers</h2>
+<p>Spack is able to find certain compilers on its own, and will add them to your environment as it does. 
+In order to obtain the list of available compilers on Eagle the user can run <code>module avail</code>, the user can then load the compiler of interest using <code>module use &lt;compiler&gt;</code>.
+To see which compilers your Spack collections know about, type</p>
+<p><code>spack compilers</code></p>
+<p>To add an existing compiler installation to your collection, point Spack to its location through</p>
+<p><code>spack add compiler &lt;path to Spack-installed compiler directory with hash in name&gt;</code></p>
+<p>The command will add to <code>$HOME/.spack/linux/compilers.yaml</code>. 
+To configure more generally, move changes to one of the lower-precedence <code>compilers.yaml</code> files (paths described below in Configuration section).
+Spack has enough facility with standard compilers (e.g., GCC, Intel, PGI, Clang) that this should be all that’s required to use the added compiler successfully.</p>
+<h2 id="available-packages-in-repo">Available Packages in Repo</h2>
+<table>
+<thead>
+<tr>
+<th><div style="width:198px">Command</div></th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>spack list</code></td>
+<td>all available packages by name. Dumps repo content, so if use local repo, this should dump local package load.</td>
+</tr>
+<tr>
+<td><code>spack list &lt;pattern&gt;</code></td>
+<td>all available packages that have <code>&lt;pattern&gt;</code> somewhere in their name. <code>&lt;pattern&gt;</code> is simple, not regex.</td>
+</tr>
+<tr>
+<td><code>spack info &lt;package_name&gt;</code></td>
+<td>available versions classified as safe, preferred, or variants, as well as dependencies. Variants are important for selecting certain build features, e.g., with/without Infiniband support.</td>
+</tr>
+<tr>
+<td><div style="width:198px"><code>spack versions &lt;package_name&gt;</code></div></td>
+<td>see which versions are available</td>
+</tr>
+</tbody>
+</table>
+<h2 id="installed-packages">Installed packages</h2>
+<table>
+<thead>
+<tr>
+<th><div style="width:98px">Command</div></th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>spack find</code></td>
+<td>list all locally installed packages</td>
+</tr>
+<tr>
+<td><code>spack find --deps &lt;package&gt;</code></td>
+<td>list dependencies of <code>&lt;package&gt;</code></td>
+</tr>
+<tr>
+<td><code>spack find --explicit</code></td>
+<td>list packages that were explicitly requested via spack install</td>
+</tr>
+<tr>
+<td><code>spack find --implicit</code></td>
+<td>list packages that were installed as a dependency to an explicitly installed package</td>
+</tr>
+<tr>
+<td><code>spack find --long</code></td>
+<td>include partial hash in package listing. Useful to see distinct builds</td>
+</tr>
+<tr>
+<td><code>spack find --paths</code></td>
+<td>show installation paths</td>
+</tr>
+</tbody>
+</table>
+<p>Finding how an installed package was built does not seem as straightforward as it should be. 
+Probably the best way is to examine <code>&lt;install_path&gt;/.spack/build.env</code>, where <code>&lt;install_path&gt;</code> is the Spack-created directory with the hash for the package being queried. 
+The environment variable <code>SPACK_SHORT_SPEC</code> in <code>build.env</code> contains the Spack command that can be used to recreate the package (including any implicitly defined variables, e.g., arch). 
+The 7-character short hash is also included, and should be excluded from any spack install command.</p>
+<table>
+<thead>
+<tr>
+<th><div style="width:98px">Symbols</div></th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>@</code></td>
+<td>package versions. Can use range operator “:”, e.g., X@1.2:1.4 . Range is inclusive and open-ended, e.g., “X@1.4:” matches any version of package X 1.4 or higher.</td>
+</tr>
+<tr>
+<td><code>%</code></td>
+<td>compiler spec. Can include versioning, e.g., X%gcc@4.8.5</td>
+</tr>
+<tr>
+<td><code>+,-,~</code></td>
+<td>build options. +opt, -opt, “~” is equivalent to “-“</td>
+</tr>
+<tr>
+<td><code>name=value</code></td>
+<td>build options for non-Boolean flags. Special names are cflags, cxxflags, fflags, cppflags, ldflags, and ldlibs</td>
+</tr>
+<tr>
+<td><code>target=value</code></td>
+<td>for defined CPU architectures, e.g., target=haswell</td>
+</tr>
+<tr>
+<td><code>os=value</code></td>
+<td>for defined operating systems</td>
+</tr>
+<tr>
+<td><code>^</code></td>
+<td>dependency specification, using above specs as appropriate</td>
+</tr>
+<tr>
+<td><code>^/&lt;hash&gt;</code></td>
+<td>specify dependency where <code>&lt;hash&gt;</code> is of sufficient length to resolve uniquely</td>
+</tr>
+</tbody>
+</table>
+<h2 id="external-packages">External Packages</h2>
+<p>Sometimes dependencies are expected to be resolved through a package that is installed as part of the host system, or otherwise outside of the Spack database. 
+One example is Slurm integration into MPI builds. 
+If you were to try to add a dependency on one of the listed Slurms in the Spack database, you might see, e.g.,</p>
+<div class="highlight"><pre><span></span><code><span class="o">[</span><span class="nv">$user</span>@el2 ~<span class="o">]</span>$ spack spec openmpi@3.1.3%gcc@7.3.0 ^slurm@19-05-3-2
+Input spec
+--------------------------------
+openmpi@3.1.3%gcc@7.3.0
+    ^slurm@19-05-3-2
+
+Concretized
+--------------------------------
+<span class="o">==</span>&gt; Error: The spec <span class="s1">&#39;slurm&#39;</span> is configured as not buildable, and no matching external installs were found
+</code></pre></div>
+<p>Given that something like Slurm is integrated deeply into the runtime infrastructure of our local environment, we really want to point to the local installation. 
+The way to do that is with a <code>packages.yaml</code> file, which can reside in the standard Spack locations (see Configuration below). 
+See the Spack <a href="https://spack.readthedocs.io/en/latest/">docs</a> on external packages for more detail. 
+In the above example at time of writing, we would like to build OpenMPI against our installed <code>Slurm 19.05.2</code>. 
+So, you can create file <code>~/.spack/linux/packages.yaml</code> with the contents</p>
+<div class="highlight"><pre><span></span><code><span class="nt">packages</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">slurm</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">paths</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">slurm@18-08-0-3</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/nopt/slurm/18.08.3</span><span class="w"></span>
+<span class="w">      </span><span class="nt">slurm@19-05-0-2</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/nopt/slurm/19.05.2</span><span class="w"></span>
+</code></pre></div>
+<p>that will enable builds against both installed Slurm versions. 
+Then you should see</p>
+<div class="highlight"><pre><span></span><code><span class="o">[</span><span class="nv">$user</span>@el2 ~<span class="o">]</span>$ spack spec openmpi@3.1.3%gcc@7.3.0 ^slurm@19-05-0-2
+Input spec
+--------------------------------
+openmpi@3.1.3%gcc@7.3.0
+    ^slurm@19-05-0-2
+
+Concretized
+--------------------------------
+openmpi@3.1.3%gcc@7.3.0 <span class="nv">cflags</span><span class="o">=</span><span class="s2">&quot;-O2 -march=skylake-avx512 -mtune=skylake-avx512&quot;</span> <span class="nv">cxxflags</span><span class="o">=</span><span class="s2">&quot;-O2 -march=skylake-avx512 -mtune=skylake-avx512&quot;</span> <span class="nv">fflags</span><span class="o">=</span><span class="s2">&quot;-O2 -march=skylake-avx512 -mtune=skylake-avx512&quot;</span> +cuda+cxx_exceptions <span class="nv">fabrics</span><span class="o">=</span>verbs ~java~legacylaunchers~memchecker+pmi <span class="nv">schedulers</span><span class="o">=</span>slurm ~sqlite3~thread_multiple+vt <span class="nv">arch</span><span class="o">=</span>linux-centos7-x86_64
+-
+    ^slurm@19-05-0-2%gcc@7.3.0 <span class="nv">cflags</span><span class="o">=</span><span class="s2">&quot;-O2 -march=skylake-avx512 -mtune=skylake-avx512&quot;</span> <span class="nv">cxxflags</span><span class="o">=</span><span class="s2">&quot;-O2 -march=skylake-avx512 -mtune=skylake-avx512&quot;</span> <span class="nv">fflags</span><span class="o">=</span><span class="s2">&quot;-O2 -march=skylake-avx512 -mtune=skylake-avx512&quot;</span> ~gtk~hdf5~hwloc~mariadb+readline <span class="nv">arch</span><span class="o">=</span>linux-centos7-x86_64
+</code></pre></div>
+<p>where the Slurm dependency will be satisfied with the installed Slurm (cflags, cxxflags, and arch are coming from site-wide configuration in <code>/nopt/nrel/apps/base/2018-12-02/spack/etc/spack/compilers.yaml</code>; the variants string is likely coming from the configuration in the Spack database, and should be ignored).</p>
+<h2 id="virtual-packages">Virtual Packages</h2>
+<p>It is possible to specify some packages for which multiple options are available at a higher level. 
+For example, <code>mpi</code> is a virtual package specifier that can resolve to mpich, openmpi, Intel MPI, etc. 
+If a package's dependencies are spec'd in terms of a virtual package, Spack will choose a specific package at build time according to site preferences.
+Choices can be constrained by spec, e.g.,</p>
+<p><code>spack install X ^mpich@3</code></p>
+<p>would satisfy package X’s mpi dependency with some version 3 of MPICH.
+You can see available providers of a virtual package with</p>
+<p><code>spack providers &lt;vpackage&gt;</code></p>
+<h2 id="extensions">Extensions</h2>
+<p>In many cases, frameworks have sub-package installations in standard locations within their own installations. 
+A familiar example of this is Python and its usual module location in <code>lib(64)/python&lt;version&gt;/site-packages</code>, and pointed to via the environment variable <code>PYTHONPATH</code>.</p>
+<p>To find available extensions</p>
+<p><code>spack extensions &lt;package&gt;</code></p>
+<p>Extensions are just packages, but they are not enabled for use out of the box. To do so (e.g., so that you could load the Python module after installing), you can either load the extension package’s environment module, or</p>
+<p><code>spack use &lt;extension package&gt;</code></p>
+<p>This only lasts for the current session, and is not of general interest. A more persistent option is to activate the extension:</p>
+<p><code>spack activate &lt;extension package&gt;</code></p>
+<p>This takes care of dependencies as well. The inverse operation is deactivation.</p>
+<table>
+<thead>
+<tr>
+<th><div style="width:98px">Command</div></th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>spack deactivate &lt;extension package&gt;</code></td>
+<td>deactivates extension alone. Will not deactivate if dependents exist</td>
+</tr>
+<tr>
+<td><code>spack deactivate --force &lt;extension package&gt;</code></td>
+<td>deactivates regardless of dependents</td>
+</tr>
+<tr>
+<td><code>spack deactivate --all &lt;extension package&gt;</code></td>
+<td>deactivates extension and all dependencies</td>
+</tr>
+<tr>
+<td><code>spack deactivate --all &lt;parent&gt;</code></td>
+<td>deactivates all extensions of parent (e.g., <code>&lt;python&gt;</code>)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="modules">Modules</h2>
+<p>Spack can auto-create environment modulefiles for the packages that it builds, both in Tcl for “environment modules” per se, and in Lua for Lmod. 
+Auto-creation includes each dependency and option permutation, which can lead to excessive quantities of modulefiles. 
+Spack also uses the package hash as part of the modulefile name, which can be somewhat disconcerting to users. 
+These default behaviors can be treated in the active modules.yaml file, as well as practices used for support.
+Tcl modulefiles are created in <code>$SPACK_ROOT/share/spack/modules</code> by default, and the equivalent Lmod location is <code>$SPACK_ROOT/share/spack/lmod</code>. 
+Only Tcl modules are created by default. 
+You can modify the active modules.yaml file in the following ways to affect some example behaviors:</p>
+<h4 id="to-turn-lmod-module-creation-on">To turn Lmod module creation on:</h4>
+<div class="highlight"><pre><span></span><code>modules:
+    enable:
+        - tcl
+        - lmod 
+</code></pre></div>
+<h4 id="to-change-the-modulefile-naming-pattern">To change the modulefile naming pattern:</h4>
+<div class="highlight"><pre><span></span><code>modules:
+    tcl:
+        naming_scheme: ‘{name}/{version}/{compiler.name}-{compiler.version}
+</code></pre></div>
+<p>would achieve the Eagle naming scheme. </p>
+<h4 id="to-remove-default-variable-settings-in-the-modulefile-eg-cpath">To remove default variable settings in the modulefile, e.g., CPATH:</h4>
+<div class="highlight"><pre><span></span><code>modules:
+    tcl:
+        all:
+            filter:
+                environment_blacklist: [‘CPATH’]
+</code></pre></div>
+<p>Note that this would affect Tcl modulefiles only; if Spack also creates Lmod files, those would still contain default CPATH modification behavior.</p>
+<h4 id="to-prevent-certain-modulefiles-from-being-built-you-can-whitelist-and-blacklist">To prevent certain modulefiles from being built, you can whitelist and blacklist:</h4>
+<div class="highlight"><pre><span></span><code>modules:
+    tcl:
+        whitelist: [‘gcc’]
+        blacklist: [‘%gcc@4.8.5’]
+</code></pre></div>
+<p>This would create modules for all versions of GCC built using the system compiler, but not for the system compiler itself.
+There are a great many further behaviors that can be changed, see https://spack.readthedocs.io/en/latest/module_file_support.html#modules for more.</p>
+<p>For general user support, it is not a bad idea to keep the modules that are publicly visible separate from the collection that Spack auto-generates. This involves some manual copying, but is generally not onerous as all rpaths are included in Spack-built binaries (i.e., you don’t have to worry about satisfying library dependencies for Spack applications with an auto-built module, since library paths are hard-coded into the application binaries). This separation also frees one from accepting Spack’s verbose coding formats within modulefiles, should you decide to maintain certain modulefiles another way.</p>
+<h2 id="configuration">Configuration</h2>
+<p>Spack uses hierarchical customization files. 
+Every package is a Python class, and inherits from the top-level class Package. 
+Depending on the degree of site customization, you may want to fork the Spack repo to create your own customized Spack package.
+There are 4 levels of configuration. In order of increasing precedence,</p>
+<ol>
+<li>Default: <code>$SPACK_ROOT/etc/spack/default</code></li>
+<li>System-wide: <code>/etc/spack</code></li>
+<li>Site-wide: <code>$SPACK_ROOT/etc/spack</code></li>
+<li>User-specific: <code>$HOME/.spack</code></li>
+</ol>
+<p>Spack configuration uses YAML files, a subset of JSON native to Python.
+There are 5 main configuration files.</p>
+<ol>
+<li>
+<p><code>compilers.yaml</code>. Customizations to the Spack-known compilers for all builds</p>
+<p>i.  Use full path to compilers</p>
+<p>ii. Additional rpaths beyond the Spack repo</p>
+<p>iii.    Additional modules necessary when invoking compilers</p>
+<p>iv. Mixing toolchains</p>
+<p>v.  Optimization flags</p>
+<p>vi. Environment modifications</p>
+</li>
+<li>
+<p><code>config.yaml</code>. Base functionality of Spack itself</p>
+<p>i.  install_tree: where to install packages</p>
+<p>ii. build_stage: where to do compiles. For performance, can specify a local SSD or a RAMFS.</p>
+<p>iii.    modules_roots: where to install modulefiles</p>
+</li>
+<li>
+<p><code>modules.yaml</code>. How to create modulefiles</p>
+<p>i.  whitelist/blacklist packages from having their own modulefiles created</p>
+<p>ii. adjust hierarchies</p>
+</li>
+<li>
+<p><code>packages.yaml</code>. Specific optimizations, such as multiple hardware targets.</p>
+<p>i.  dependencies, e.g., don’t build OpenSSL (usually want sysadmins to handle updates, etc.)</p>
+<p>ii. mark specific packages as non-buildable, e.g., vendor MPIs</p>
+<p>iii.    preferences, e.g., BLAS -&gt; MKL, LAPACK -&gt; MKL</p>
+</li>
+<li>
+<p><code>repos.yaml</code></p>
+<p>i.  Directory-housed, not remote</p>
+<p>ii. Specify other package locations</p>
+<p>iii.    Can then spec build in other configs (e.g., binary, don’t build)</p>
+<p>iv. Precedence in YAML file order, but follows Spack precedence order (user &gt; site &gt; system &gt; default)</p>
+</li>
+</ol>
+<h3 id="variants-standard-adjustments-to-package-build">Variants: standard adjustments to package build</h3>
+<p><code>spack edit …</code>-- opens Python file for package, can easily write new variants</p>
+<h3 id="providers">Providers</h3>
+<p><code>spack providers</code> -- virtual packages, e.g., blas, mpi, etc. Standards, not implementations. Abstraction of an implementation (blas/mkl, mpi/mpich, etc.)</p>
+<h3 id="mirrors">Mirrors</h3>
+<ul>
+<li>mirrors.yaml: where packages are kept</li>
+<li>A repo is where build information is kept; a mirror is where code lives</li>
+</ul>
+<div class="highlight"><pre><span></span><code>MirrorTopLevel
+    package_a
+        package_a-version1.tar.gz
+        package_a-version2.tar.gz
+    package_b
+        ⋮
+</code></pre></div>
+<p><code>spack mirror</code> to manage mirrors</p>
+<h3 id="repos">Repos</h3>
+<ul>
+<li>Can take precedence from, e.g., a site repo</li>
+<li>Can namespace</li>
+</ul>
+<div class="highlight"><pre><span></span><code>packages
+    repo.yaml
+    alpha
+        hotfix-patch-ABC.patch
+        package.py
+        package.pyc
+    beta
+    theta
+</code></pre></div>
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+<footer class="md-footer">
+
+  <!-- Link to previous and/or next page -->
+  
+    <nav
+      class="md-footer__inner md-grid"
+      aria-label="Footer"
+    >
+
+      <!-- Link to previous page -->
+      
+        
+        <a
+          href="../conda/"
+          class="md-footer__link md-footer__link--prev"
+          aria-label="Previous: Conda"
+          rel="prev"
+        >
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Conda
+            </div>
+          </div>
+        </a>
+      
+
+      <!-- Link to next page -->
+      
+        
+        <a
+          href="../Git/Git/"
+          class="md-footer__link md-footer__link--next"
+          aria-label="Next: Git"
+          rel="next"
+        >
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Git
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+	<a href="https://www.nrel.gov/computational-science/"
+	   title="Computational Science at NREL">Computational Science at NREL</a><br>
+	<a href="https://www.nrel.gov/hpc/about-hpc.html" target="_blank"
+	   title="About NREL High-Performance Computing">About NREL High-Performance Computing</a><br>
+	<a href="https://www.nrel.gov/hpc/contact-us.html" target="_blank"
+	   title="Contact Us">Contact Us</a><br>
+      </div>
+    </div>
+  </div>
+<footer>
+
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.indexes"], "search": "../../../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.5a2dcb6a.min.js"></script>
+      
+    
+    
+  </body>
+</html>
