@@ -25,7 +25,54 @@ The JDFTx package (http://jdftx.org) is a plane-wave density functional theory (
 <details>
 <summary>Vermillion CPU</summary>
 <br>
-Need to figure out how to add in script
+```
+#!/bin/bash
+#SBATCH --job-name=vasp
+#SBATCH --nodes=1
+#SBATCH --time=8:00:00
+##SBATCH --error=std.err
+##SBATCH --output=std.out
+#SBATCH --partition=sm
+#SBATCH --exclusive
+
+cat $0
+
+hostname
+
+source /nopt/nrel/apps/210929a/myenv.2110041605
+
+module purge
+ml gcc
+ml vasp
+
+# some extra lines that have been shown to improve VASP reliability on Vermilion
+ulimit -s unlimited
+export UCX_TLS=tcp,self
+export OMP_NUM_THREADS=1
+
+# lines to set "ens7" as the interconnect network
+module use /nopt/nrel/apps/220525b/level01/modules/lmod/linux-rocky8-x86_64/gcc/12.1.0
+module load openmpi
+OMPI_MCA_param="btl_tcp_if_include ens7"
+
+#### wget is needed to download data
+ml wget
+
+#### get input and set it up
+#### This is from an old benchmark test
+#### see https://github.nrel.gov/ESIF-Benchmarks/VASP/tree/master/bench2
+
+
+mkdir input
+
+wget https://github.nrel.gov/raw/ESIF-Benchmarks/VASP/master/bench2/input/INCAR?token=AAAALJZRV4QFFTS7RC6LLGLBBV67M   -q -O INCAR
+wget https://github.nrel.gov/raw/ESIF-Benchmarks/VASP/master/bench2/input/POTCAR?token=AAAALJ6E7KHVTGWQMR4RKYTBBV7SC  -q -O POTCAR
+wget https://github.nrel.gov/raw/ESIF-Benchmarks/VASP/master/bench2/input/POSCAR?token=AAAALJ5WKM2QKC3D44SXIQTBBV7P2  -q -O POSCAR
+wget https://github.nrel.gov/raw/ESIF-Benchmarks/VASP/master/bench2/input/KPOINTS?token=AAAALJ5YTSCJFDHUUZMZY63BBV7NU -q -O KPOINTS
+
+srun --mpi=pmi2 -n 16 vasp_std
+
+```
 </details>
 
 <details>
