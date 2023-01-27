@@ -26,13 +26,13 @@ The JDFTx package (http://jdftx.org) is a plane-wave density functional theory (
 <summary>Vermillion CPU</summary>
 <br>
 Need to figure out how to add in script
-<\details>
+</details>
 
 <details>
 <summary>Vermillion GPU</summary>
 <br> 
 Need to figure out how to add in script
-<\details>
+</details>
 
 ## Building JDFTx from Source on Vermillion
 
