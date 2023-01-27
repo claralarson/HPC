@@ -33,7 +33,6 @@ Need to figure out how to add in script
 <br>
 Need to figure out how to add in script
 <details>
-</details>
 
 ## Building JDFTx from Source on Vermillion
 
