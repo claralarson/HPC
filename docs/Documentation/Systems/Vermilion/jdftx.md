@@ -25,6 +25,7 @@ The JDFTx package (http://jdftx.org) is a plane-wave density functional theory (
 <details>
 <summary>Vermillion CPU</summary>
 <br>
+
 ```
 #!/bin/bash
 #SBATCH --job-name=vasp
@@ -73,6 +74,7 @@ wget https://github.nrel.gov/raw/ESIF-Benchmarks/VASP/master/bench2/input/KPOINT
 srun --mpi=pmi2 -n 16 vasp_std
 
 ```
+ 
 </details>
 
 <details>
