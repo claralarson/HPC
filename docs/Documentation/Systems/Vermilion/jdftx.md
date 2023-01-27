@@ -12,6 +12,21 @@ The JDFTx package (http://jdftx.org) is a plane-wave density functional theory (
 
 
 
+## Application Information, Documentation, and Support
+
+
+
+## Using JDFTx on Vermillion
+
+
+
+## Sample Job Scripts
+
+
+
+## Building JDFTx from Source on Vermillion
+
+
 
 The batch script given above can be modified to run VASP.
 
