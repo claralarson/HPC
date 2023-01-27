@@ -4,7 +4,14 @@
  parent: Vermilion
  grand_parent: Systems
 ---
-## Running VASP on Vermilion
+## JDFTx
+
+The JDFTx package (http://jdftx.org) is a plane-wave density functional theory (DFT) code that calculates the electronic properties of optoelectronic and electrocatalytic systems, with a particular strength in describing solvated system under applied bias. JDFTx supports a range of exchange correlation functionals, dispersion corrections, several formats of norm-conserving and ultrasoft pseudopotentials that are pre-installed, and calculations of systems of any dimensionality from 0 to 3: molecules, wires, slabs / 2D materials and bulk. 
+
+## Availability on Vermillion
+
+
+
 
 The batch script given above can be modified to run VASP.
 
