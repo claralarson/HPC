@@ -22,7 +22,106 @@ The JDFTx package (http://jdftx.org) is a plane-wave density functional theory (
 
 ## Sample Job Scripts
 
+<details>
+<summary>Vermillion CPU</summary>
+<br>
+```
+#!/bin/bash
+#SBATCH --job-name=vasp
+#SBATCH --nodes=1
+#SBATCH --time=8:00:00
+##SBATCH --error=std.err
+##SBATCH --output=std.out
+#SBATCH --partition=sm
+#SBATCH --exclusive
 
+cat $0
+
+hostname
+
+source /nopt/nrel/apps/210929a/myenv.2110041605
+
+module purge
+ml gcc
+ml vasp
+
+# some extra lines that have been shown to improve VASP reliability on Vermilion
+ulimit -s unlimited
+export UCX_TLS=tcp,self
+export OMP_NUM_THREADS=1
+
+# lines to set "ens7" as the interconnect network
+module use /nopt/nrel/apps/220525b/level01/modules/lmod/linux-rocky8-x86_64/gcc/12.1.0
+module load openmpi
+OMPI_MCA_param="btl_tcp_if_include ens7"
+
+#### wget is needed to download data
+ml wget
+
+#### get input and set it up
+#### This is from an old benchmark test
+#### see https://github.nrel.gov/ESIF-Benchmarks/VASP/tree/master/bench2
+
+
+mkdir input
+
+wget https://github.nrel.gov/raw/ESIF-Benchmarks/VASP/master/bench2/input/INCAR?token=AAAALJZRV4QFFTS7RC6LLGLBBV67M   -q -O INCAR
+wget https://github.nrel.gov/raw/ESIF-Benchmarks/VASP/master/bench2/input/POTCAR?token=AAAALJ6E7KHVTGWQMR4RKYTBBV7SC  -q -O POTCAR
+wget https://github.nrel.gov/raw/ESIF-Benchmarks/VASP/master/bench2/input/POSCAR?token=AAAALJ5WKM2QKC3D44SXIQTBBV7P2  -q -O POSCAR
+wget https://github.nrel.gov/raw/ESIF-Benchmarks/VASP/master/bench2/input/KPOINTS?token=AAAALJ5YTSCJFDHUUZMZY63BBV7NU -q -O KPOINTS
+
+srun --mpi=pmi2 -n 16 vasp_std
+
+```
+</details>
+
+<details>
+<summary>Vermillion GPU</summary>
+<br>
+```
+#!/bin/bash
+#SBATCH --job-name=vasp
+#SBATCH --nodes=2
+#SBATCH --time=1:00:00
+##SBATCH --error=std.err
+##SBATCH --output=std.out
+#SBATCH --partition=gpu
+#SBATCH --gpu-bind=map_gpu:0,1,0,1
+#SBATCH --exclusive
+
+cat $0
+
+hostname
+
+#load necessary modules and set library paths
+module use  /nopt/nrel/apps/220421a/modules/lmod/linux-rocky8-x86_64/gcc/11.3.0/
+ml nvhpc
+ml gcc
+ml fftw
+export LD_LIBRARY_PATH=/nopt/nrel/apps//220421a/install/opt/spack/linux-rocky8-zen2/gcc-11.3.0/nvhpc-22.2-ruzrtpyewnnrif6s7w7rehvpk7jimdrd/Linux_x86_64/22.2/compilers/extras/qd/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/nopt/nrel/apps//220421a/install/opt/spack/linux-rocky8-zen2/gcc-11.3.0/gcc-11.3.0-c3u46uvtuljfuqimb4bgywoz6oynridg/lib64:$LD_LIBRARY_PATH
+
+#add a path to the gpu build of VASP to your script
+export PATH=/projects/hpcapps/tkaiser2/vasp/6.3.1/nvhpc_acc:$PATH
+
+#### wget is needed to download data
+ml wget
+
+#### get input and set it up
+#### This is from an old benchmark test
+#### see https://github.nrel.gov/ESIF-Benchmarks/VASP/tree/master/bench2
+
+
+mkdir input
+
+wget https://github.nrel.gov/raw/ESIF-Benchmarks/VASP/master/bench2/input/INCAR?token=AAAALJZRV4QFFTS7RC6LLGLBBV67M   -q -O INCAR
+wget https://github.nrel.gov/raw/ESIF-Benchmarks/VASP/master/bench2/input/POTCAR?token=AAAALJ6E7KHVTGWQMR4RKYTBBV7SC  -q -O POTCAR
+wget https://github.nrel.gov/raw/ESIF-Benchmarks/VASP/master/bench2/input/POSCAR?token=AAAALJ5WKM2QKC3D44SXIQTBBV7P2  -q -O POSCAR
+wget https://github.nrel.gov/raw/ESIF-Benchmarks/VASP/master/bench2/input/KPOINTS?token=AAAALJ5YTSCJFDHUUZMZY63BBV7NU -q -O KPOINTS
+
+mpirun -npernode 1 vasp_std > vasp.$SLURM_JOB_ID
+```
+</details>
 
 ## Building JDFTx from Source on Vermillion
 
