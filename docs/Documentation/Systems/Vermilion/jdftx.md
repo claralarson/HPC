@@ -129,7 +129,33 @@ mpirun -npernode 1 vasp_std > vasp.$SLURM_JOB_ID
 
 ## Building JDFTx from Source on Vermillion
 
+Some users may want to build a more recent release of JDFTx than is available on Vermillion, or modify the source code. To do so, one must clone the JDFTx repository 
 
+```
+git clone https://github.com/shankar1729/jdftx.git your_JDFTX_directory_name
+```
+
+and go to the main directory 
+
+```
+cd your_JDFTX_directory_name/jdftx
+```
+
+JDFTx requires multiple software packages that handle things such as matrix diagonalization and fast fourier transforms, and is built with cmake, so modules for all of these must be loaded before executing the needed commands for the actual compilation. 
+
+```
+source /nopt/nrel/apps/210929a/myenv.2110041605   # get appropriate environment
+module use /nopt/nrel/apps/210929a/level02/modules/lmod/linux-rocky8-x86_64/openmpi/4.1.1-ce66uss/Core # get set of modules needed
+module use /nopt/nrel/apps/210929a/level02/modules/lmod/linux-rocky8-x86_64/Core
+ml cmake gcc intel-oneapi-mkl hdf5 gsl openmpi/4.1.1cuda-xo4gxni cuda  # load modules
+export HDF5_ROOT_DIR=/nopt/nrel/apps/210928a/level02/gcc-9.4.0/hdf5-1.12.1  #give cmake paths to certain libraries so it knows where to find them
+export CMAKE_PREFIX_PATH=$HDF5_ROOT_DIR
+export GSL_ROOT_DIR=/nopt/nrel/apps/210929a/level02/gcc-9.4.0/gsl-2.7-k2w2ugrj5wvhplcvtdarimrmy6vikqvl
+mkdir build  # make build direcory and go there
+cd build
+CC="gcc" CXX="c++" cmake -D EnableMKL=yes -D EnableScaLAPACK=yes -D EnableCUDA=yes -D EnableCuSolver=yes -D EnableHDF5=yes -D EnableProfiling=yes -D CudaAwareMPI=yes -D PinnedHostMemory=yes -D CUDA_ARCH='compute_80' -D CUDA_CODE='sm_80' -D MKL_PATH="$MKLROOT" -D GSL_PATH=$GSL_ROOT_DIR ../
+make -j
+```
 
 The batch script given above can be modified to run VASP.
 
