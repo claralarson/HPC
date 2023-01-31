@@ -141,7 +141,7 @@ and go to the main directory
 cd your_JDFTX_directory_name/jdftx
 ```
 
-JDFTx requires multiple software packages that handle things such as matrix diagonalization and fast fourier transforms, and is built with cmake, so modules for all of these must be loaded before executing the needed commands for the actual compilation. 
+JDFTx requires multiple software packages that handle things such as matrix diagonalization and fast fourier transforms, and is built with cmake, so modules for all of these must be loaded before executing the needed commands for the actual compilation. Here is the set of commands needed to build JDFTx, with annotations about the purpose of different commands
 
 ```
 source /nopt/nrel/apps/210929a/myenv.2110041605   # get appropriate environment
@@ -151,11 +151,13 @@ ml cmake gcc intel-oneapi-mkl hdf5 gsl openmpi/4.1.1cuda-xo4gxni cuda  # load mo
 export HDF5_ROOT_DIR=/nopt/nrel/apps/210928a/level02/gcc-9.4.0/hdf5-1.12.1  #give cmake paths to certain libraries so it knows where to find them
 export CMAKE_PREFIX_PATH=$HDF5_ROOT_DIR
 export GSL_ROOT_DIR=/nopt/nrel/apps/210929a/level02/gcc-9.4.0/gsl-2.7-k2w2ugrj5wvhplcvtdarimrmy6vikqvl
-mkdir build  # make build direcory and go there
+mkdir build  # make build direcory and go there, execute actual cmake command, and then compile JDFTx with make
 cd build
 CC="gcc" CXX="c++" cmake -D EnableMKL=yes -D EnableScaLAPACK=yes -D EnableCUDA=yes -D EnableCuSolver=yes -D EnableHDF5=yes -D EnableProfiling=yes -D CudaAwareMPI=yes -D PinnedHostMemory=yes -D CUDA_ARCH='compute_80' -D CUDA_CODE='sm_80' -D MKL_PATH="$MKLROOT" -D GSL_PATH=$GSL_ROOT_DIR ../
 make -j
 ```
+
+After the last command is executed, the JDFTx executables will be generated in the build directory.
 
 The batch script given above can be modified to run VASP.
 
