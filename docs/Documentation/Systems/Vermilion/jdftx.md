@@ -6,7 +6,7 @@
 ---
 ## JDFTx
 
-The [JDFTx package](http://jdftx.org) is a plane-wave density functional theory (DFT) code that calculates the electronic properties of optoelectronic and electrocatalytic systems, with a particular strength in describing solvated system under applied bias. JDFTx supports a range of exchange correlation functionals, dispersion corrections, several formats of norm-conserving and ultrasoft pseudopotentials that are pre-installed, and calculations of systems of any dimensionality from 0 to 3: molecules, wires, slabs / 2D materials and bulk. 
+The [JDFTx](http://jdftx.org) package is a plane-wave density functional theory (DFT) code that calculates the electronic properties of optoelectronic and electrocatalytic systems, with a particular strength in describing solvated system under applied bias. JDFTx supports a range of exchange correlation functionals, dispersion corrections, several formats of norm-conserving and ultrasoft pseudopotentials that are pre-installed, and calculations of systems of any dimensionality from 0 to 3: molecules, wires, slabs / 2D materials and bulk. 
 
 ## Availability on Vermillion
 
@@ -15,7 +15,7 @@ The latest development version of JDFTx available on [GitHub](https://github.com
 
 ## Application Information, Documentation, and Support
 
-JDFTx is freely available and can be downloaded from [GitHub](https://github.com/shankar1729/jdftx). Extensive online documentation, including tutorials, input command documentation, and compilation instructions, can be found on the [JDFTx homepage](http://jdftx.org). For troubleshooting, see the [issues portion](https://github.com/shankar1729/jdftx/issues) of the Github site and open a new issue if the issue has not been raised before. If there are any issues with the JDFTx module, please submit a ticket to HPC-Help. 
+JDFTx is freely available and can be downloaded from [GitHub](https://github.com/shankar1729/jdftx). Extensive online documentation, including tutorials, input command documentation, and compilation instructions, can be found on the [JDFTx](http://jdftx.org) homepage. For troubleshooting, see the [issues](https://github.com/shankar1729/jdftx/issues) portion of the Github site and open a new issue if the issue has not been raised before. If there are any issues with the JDFTx module, please submit a ticket to HPC-Help. 
 
 
 ## Using JDFTx on Vermillion
