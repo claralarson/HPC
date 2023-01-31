@@ -20,7 +20,7 @@ JDFTx is freely available and can be downloaded from [GitHub](https://github.com
 
 ## Using JDFTx on Vermillion
 
-DVF: Frankly, this section doesn't seem that valuable on the NERSC site. If we want to have it, it would likely need to be after the module for JDFTx has been created. 
+We will describe below the optimal numbers of nodes, cores, threads, etc. to use on Vermillion for typical JDFTx surface chemistry calculations. However, a first important thing to note for JDFTx is that, unlike other planewave DFT packages such as VASP or Quantum ESPRESSO, JDFTx parallelizes over the reciprocal lattice vectors using threads instead of MPI. JDFTx implements MPI parallelism over the k-points and spin, so the maximum number of MPI tasks is given by product of the number of k-points and number of spins (which is generally a relatively small number for surface chemistry calculations). Given that parallelization over the reciprocal lattice vectors is the largest source of parallelism in planewave DFT calculations, the number of MPI tasks used by a JDFTx calculation is typically much less than than for packages such as VASP. Additionally, since threads can only communicate on-node, the maximum number of cores over which reciprocal lattice vectors can be parallelized is the number of cores on a node.
 
 ## Sample Job Scripts
 
